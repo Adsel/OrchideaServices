@@ -1,0 +1,16 @@
+{
+  "config": {
+    "platform-check": false
+  },
+  "require": {
+    "illuminate/database": "^8.20",
+    "altorouter/altorouter": "^2.0"
+  },
+  "autoload": {
+    "classmap": [
+      "server",
+      "server/api",
+      "server/database"
+    ]
+  }
+}
