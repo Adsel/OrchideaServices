@@ -1,0 +1,35 @@
+@import "src/assets/scss/shared";
+
+header {
+  background-color: $color-dark;
+  display: flex;
+  align-items: center;
+  height: $header-height;
+  padding: 8px 2.5rem;
+
+  & > span.header-title {
+    color: $color-white;
+    font-size: 1.25rem;
+    margin-right: 2rem;
+    font-weight: $font-weight-medium;
+  }
+
+  & > ::v-deep(div) > a {
+    color: $color-white;
+    text-decoration: none;
+    margin-right: 1.25rem;
+  }
+
+  & > div.logo-min {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+      width: 100%;
+    }
+  }
+}
