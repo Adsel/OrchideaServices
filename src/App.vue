@@ -13,5 +13,7 @@ export default {
 
 body {
   font-family: 'Lato';
+  margin: 0;
+  padding: 0;
 }
 </style>

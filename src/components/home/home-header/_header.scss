@@ -1,4 +1,4 @@
-@import "src/assets/scss/shared";
+@import "../../../assets/scss/shared";
 
 header {
   background-color: $color-dark;
@@ -21,8 +21,9 @@ header {
   }
 
   & > div.logo-min {
-    width: 32px;
-    height: 32px;
+    $logoSquare: 32px;
+    width: $logoSquare;
+    height: $logoSquare;
     margin-right: 0.5rem;
     display: flex;
     justify-content: center;
