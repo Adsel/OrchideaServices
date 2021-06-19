@@ -1,0 +1,27 @@
+@import "../../../../assets/scss/shared";
+
+.footer-mobile {
+  @include media('lg', 'min') {
+    display: none;
+  }
+
+  background-color: $color-gray;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  justify-content: center;
+
+  & > div {
+    .fa-copyright {
+      font-size: 1.125rem;
+    }
+
+    a.copy-by {
+      text-decoration: none;
+      color: $color-white;
+    }
+  }
+}

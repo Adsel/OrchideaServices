@@ -1,0 +1,26 @@
+@import "../../../../assets/scss/shared";
+
+.container {
+  @include media('lg', 'min') {
+    display: none;
+  }
+
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+
+  & > .navbar > div.logo-min {
+    $logoSquare: 32px;
+    width: $logoSquare;
+    height: $logoSquare;
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,74 @@
+@import "../../../assets/scss/shared";
+
+aside {
+  @include media('lg', 'max') {
+    display: none;
+  }
+
+  width: 30%;
+  background-color: $color-dark;
+  color: $color-white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  z-index: $layer-2;
+
+  & > div.intro {
+    padding: 2.5rem 0;
+
+    @include media('md', 'min') {
+      padding: 1.5rem 0;
+    }
+
+    & > .desc-wrapper {
+      padding: 0 2.5rem;
+
+      @include media('md', 'min') {
+        padding: 0 1.5rem;
+      }
+
+      & > span.desc {
+        width: 100%;
+        padding: 5px 0;
+        display: block;
+
+        &:nth-child(1) {
+          padding-top: 15px;
+          border-top: solid 1px $color-white;
+        }
+
+        & > .font-achievements {
+          color: $color-red;
+        }
+
+        & > .font-lottery {
+          color: $color-green;
+        }
+      }
+    }
+  }
+
+  & > div > div > h1.prolog-header {
+    font-weight: $font-weight-medium;
+    font-size: 2rem;
+    margin: 0 0 0.5rem 0;
+    padding: 0 2.5rem;
+
+    @include media('md', 'min') {
+      padding: 0 1.5rem;
+    }
+  }
+
+  & > div > div.prolog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3rem 0;
+
+    img.prolog-image {
+      margin-bottom: 2rem;
+      max-width: 100%;
+    }
+  }
+}
