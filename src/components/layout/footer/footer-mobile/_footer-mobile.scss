@@ -1,7 +1,7 @@
-@import "../../../assets/scss/shared";
+@import "../../../../assets/scss/shared";
 
 .footer-mobile {
-  @include media('md', 'min') {
+  @include media('lg', 'min') {
     display: none;
   }
 

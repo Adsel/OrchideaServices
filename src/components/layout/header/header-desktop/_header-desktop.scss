@@ -1,7 +1,7 @@
-@import "../../../assets/scss/shared";
+@import "../../../../assets/scss/shared";
 
 header {
-  @include media('md', 'max') {
+  @include media('lg', 'max') {
     display: none;
   }
 

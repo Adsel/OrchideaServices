@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import HeaderDesktop from "./home-header-desktop/HeaderDesktop";
+import HeaderDesktop from "../layout/header/header-desktop/HeaderDesktop";
 import HomeAside from "./home-aside-desktop/HomeAsideDesktop";
 import HomeSection from "./home-section/HomeSection";
-import HomeHeaderMobile from "./home-header-mobile/HomeHeaderMobile";
-import FooterMobile from "../layout/footer/FooterMobile";
+import HomeHeaderMobile from "../layout/header/header-mobile/HeaderMobile";
+import FooterMobile from "../layout/footer/footer-mobile/FooterMobile";
 
 export default {
   components: {
@@ -37,11 +37,11 @@ export default {
   max-width: 100%;
   padding: 0;
 
-  @include media('md', 'min') {
+  @include media('lg', 'min') {
     height: calc(100vh - #{$header-height});
   }
 
-  @include media('md', 'max') {
+  @include media('lg', 'max') {
     overflow: hidden;
   }
 }

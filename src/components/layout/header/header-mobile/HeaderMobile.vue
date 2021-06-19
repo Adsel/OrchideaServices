@@ -2,7 +2,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
       <div class="logo-min">
-        <img src="../../../assets/image/logo.png" alt="logo.png" />
+        <img src="../../../../assets/image/logo.png" alt="logo.png" />
       </div>
       <span class="navbar-brand">ORCHIDEA</span>
 
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import HomeHeaderMobileLink from "./HomeHeaderMobileLink";
+import HomeHeaderMobileLink from "./HeaderMobileLink";
 
 export default {
   components: {
@@ -32,5 +32,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "home-header-mobile";
+@import "header-mobile";
 </style>

@@ -1,10 +1,11 @@
 @import "../../../assets/scss/shared";
 
 aside {
-  @include media('md', 'max') {
+  @include media('lg', 'max') {
     display: none;
   }
 
+  width: 30%;
   background-color: $color-dark;
   color: $color-white;
   display: flex;
@@ -12,34 +13,41 @@ aside {
   flex-direction: column;
   z-index: $layer-2;
 
-  div.copy {
-    background-color: $color-gray;
-    width: 100%;
-    min-height: 4.75rem;
-    padding: 0 2.5rem;
-    display: flex;
-    align-items: center;
-    font-size: 1.25rem;
+  & > div.intro {
+    padding: 2.5rem 0;
 
-    & > div > a.copy-by {
-      text-decoration: none;
-      color: $color-dark;
-      font-weight: bold;
+    @include media('md', 'min') {
+      padding: 1.5rem 0;
+    }
+
+    & > .desc-wrapper {
+      padding: 0 2.5rem;
+
+      @include media('md', 'min') {
+        padding: 0 1.5rem;
+      }
+
+      & > span.desc {
+        border-top: solid 1px $color-white;
+        width: 100%;
+        padding: 5px 0;
+        display: block;
+      }
     }
   }
 
-  & > div.intro {
-    padding: 2.5rem;
-  }
-
-  aside > div > div > h1.prolog-header {
+  & > div > div > h1.prolog-header {
     font-weight: $font-weight-medium;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin: 0 0 0.5rem 0;
+    padding: 0 2.5rem;
+
+    @include media('md', 'min') {
+      padding: 0 1.5rem;
+    }
   }
 
   & > div > div.prolog {
-    border-bottom: solid 1px $color-white;
     display: flex;
     justify-content: center;
     align-items: center;

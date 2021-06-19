@@ -6,20 +6,22 @@
         <h1 className="prolog-header">Świat Prywatny</h1>
       </div>
 
-      Tutaj znajdziesz
-    </div>
-    <div className="copy">
-      <div>
-        <i class="far fa-copyright"></i>
-        Copyright by
-        <a className='copy-by' href="https://www.margonem.pl/?task=profile&amp;id=2111949" target="_blank">Adsel</a>
+      <div class="desc-wrapper">
+        <span class="desc">Tutaj znajdziesz</span>
       </div>
     </div>
+    <FooterPartial></FooterPartial>
   </aside>
 </template>
 
 <script>
-export default {}
+import FooterPartial from "../../layout/footer/footer-partial/FooterPartial";
+
+export default {
+  components: {
+    FooterPartial
+  }
+}
 </script>
 
 <style lang="scss" scoped>

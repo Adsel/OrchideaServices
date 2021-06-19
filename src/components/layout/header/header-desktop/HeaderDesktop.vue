@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="logo-min">
-      <img src="../../../assets/image/logo.png" alt="logo.png" />
+      <img src="../../../../assets/image/logo.png" alt="logo.png" />
     </div>
     <span class="header-title">ORCHIDEA</span>
     <HeaderLink url="/lottery" label="Loteria"></HeaderLink>

@@ -1,0 +1,23 @@
+@import "../../../../assets/scss/shared";
+
+div.copy {
+  background-color: $color-gray;
+  width: 100%;
+  min-height: 4.75rem;
+  padding: 0 2.5rem;
+
+  @include media('md', 'min') {
+    padding: 0 1.5rem;
+    font-size: 1.125rem;
+  }
+
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+
+  & > div > a.copy-by {
+    text-decoration: none;
+    color: $color-dark;
+    font-weight: bold;
+  }
+}
