@@ -7,7 +7,13 @@
       </div>
 
       <div class="desc-wrapper">
-        <span class="desc">Tutaj znajdziesz</span>
+        <span class="desc">
+          Zobacz wyniki ostatniej <span class="font-weight-bold font-lottery">loterii</span>, aby dowiedzieć się czy udało Ci się coś wygrać.
+        </span>
+        <br>
+        <span class="desc">
+          Jeżeli niestraszne Ci wyzwania, niezwłocznie zobacz listę z czekającymi na Ciebie <span class="font-weight-bold font-achievements">osiągnięciami</span>.
+        </span>
       </div>
     </div>
     <FooterPartial></FooterPartial>

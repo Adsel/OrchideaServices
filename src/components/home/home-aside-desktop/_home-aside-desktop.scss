@@ -28,10 +28,22 @@ aside {
       }
 
       & > span.desc {
-        border-top: solid 1px $color-white;
         width: 100%;
         padding: 5px 0;
         display: block;
+
+        &:nth-child(1) {
+          padding-top: 15px;
+          border-top: solid 1px $color-white;
+        }
+
+        & > .font-achievements {
+          color: $color-red;
+        }
+
+        & > .font-lottery {
+          color: $color-green;
+        }
       }
     }
   }
