@@ -6,6 +6,7 @@
       <HomeAside></HomeAside>
       <HomeSection></HomeSection>
     </div>
+    <FooterMobile></FooterMobile>
   </div>
 </template>
 
@@ -14,9 +15,11 @@ import HeaderDesktop from "./home-header-desktop/HeaderDesktop";
 import HomeAside from "./home-aside-desktop/HomeAsideDesktop";
 import HomeSection from "./home-section/HomeSection";
 import HomeHeaderMobile from "./home-header-mobile/HomeHeaderMobile";
+import FooterMobile from "../layout/footer/FooterMobile";
 
 export default {
   components: {
+    FooterMobile,
     HomeHeaderMobile,
     HeaderDesktop,
     HomeAside,
@@ -27,13 +30,19 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/scss/shared";
-.app {
-  div.content {
-    display: flex;
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
+
+.app div.content {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+
+  @include media('md', 'min') {
     height: calc(100vh - #{$header-height});
+  }
+
+  @include media('md', 'max') {
+    overflow: hidden;
   }
 }
 </style>

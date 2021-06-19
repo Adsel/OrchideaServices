@@ -1,7 +1,7 @@
 @import "../../../assets/scss/shared";
 
 .container {
-  @include media('md', 'max') {
+  @include media('md', 'min') {
     display: none;
   }
 

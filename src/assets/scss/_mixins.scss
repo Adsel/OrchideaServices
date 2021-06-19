@@ -2,13 +2,13 @@ $bootstrap-md: 768px;
 
 @mixin media($breakpoint, $direction: 'min') {
   @if $breakpoint == 'md' and $direction == 'min' {
-    @media (max-width: calc(#{$bootstrap-md} - 1px)) {
+    @media (min-width: $bootstrap-md) {
       @content;
     }
   }
 
   @if $breakpoint == 'md' and $direction == 'max' {
-    @media (min-width: $bootstrap-md) {
+    @media (max-width: calc(#{$bootstrap-md} - 1px)) {
       @content;
     }
   }
