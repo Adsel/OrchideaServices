@@ -30,6 +30,12 @@ section {
       & > i {
         font-size: 5rem;
       }
+
+      &.card {
+        font-size: 2rem;
+        height: 388px;
+        width: 25%;
+      }
     }
 
     & > a.card-achievements {
@@ -49,27 +55,18 @@ section {
       background-color: $color-green;
       box-shadow: 0px 0px 99px $color-green;
       color: $color-white;
-      font-size: 2rem;
-      height: 388px;
-      width: 25%;
     }
 
     & > a.card-achievements {
       background-color: $color-yellow;
       box-shadow: 0px 0px 99px $color-yellow;
       color: $color-dark;
-      height: 388px;
-      width: 25%;
-      font-size: 2rem;
     }
 
     a.card-regulations {
       background-color: $color-red;
       box-shadow: 0px 0px 99px $color-red;
       color: $color-white;
-      height: 388px;
-      width: 25%;
-      font-size: 2rem;
     }
   }
 }

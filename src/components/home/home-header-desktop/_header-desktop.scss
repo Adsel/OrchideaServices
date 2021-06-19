@@ -1,6 +1,10 @@
 @import "../../../assets/scss/shared";
 
 header {
+  @include media('md', 'min') {
+    display: none;
+  }
+
   background-color: $color-dark;
   display: flex;
   align-items: center;

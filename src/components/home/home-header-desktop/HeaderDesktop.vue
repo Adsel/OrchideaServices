@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import HeaderLink from "./HeaderLink";
+import HeaderLink from "./HeaderDesktopLink";
 
 export default {
   components: {
@@ -21,5 +21,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "header";
+@import "header-desktop";
 </style>

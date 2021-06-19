@@ -1,6 +1,7 @@
 <template>
   <div class="app">
-    <Header></Header>
+    <HomeHeaderMobile></HomeHeaderMobile>
+    <HeaderDesktop></HeaderDesktop>
     <div class="container content">
       <HomeAside></HomeAside>
       <HomeSection></HomeSection>
@@ -9,13 +10,15 @@
 </template>
 
 <script>
-import Header from "./home-header/Header";
-import HomeAside from "./home-aside/HomeAside";
+import HeaderDesktop from "./home-header-desktop/HeaderDesktop";
+import HomeAside from "./home-aside-desktop/HomeAsideDesktop";
 import HomeSection from "./home-section/HomeSection";
+import HomeHeaderMobile from "./home-header-mobile/HomeHeaderMobile";
 
 export default {
   components: {
-    Header,
+    HomeHeaderMobile,
+    HeaderDesktop,
     HomeAside,
     HomeSection
   }

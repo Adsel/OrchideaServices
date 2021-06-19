@@ -1,6 +1,10 @@
 @import "../../../assets/scss/shared";
 
 aside {
+  @include media('md', 'min') {
+    display: none;
+  }
+
   background-color: $color-dark;
   color: $color-white;
   display: flex;
