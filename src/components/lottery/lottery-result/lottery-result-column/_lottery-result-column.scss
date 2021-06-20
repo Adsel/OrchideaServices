@@ -1,0 +1,15 @@
+@import "../../../../assets/scss/shared";
+
+.result-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-dark;
+
+  & > .number {
+    width: 50px;
+    padding: 5px 0;
+    text-align: center;
+    background-color: $color-gray;
+  }
+}
