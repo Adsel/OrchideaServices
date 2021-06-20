@@ -1,9 +1,9 @@
 <template>
   <div>
-    <router-link :to="url" :target="target" v-if="!isTargetBlank">
+    <router-link class="nav-link" :to="url" :target="target" v-if="!isTargetBlank">
       {{ label }}
     </router-link>
-    <a :href="url" :target="target" v-else>
+    <a :href="url" class="nav-link" :target="target" v-else>
       {{ label }}
     </a>
   </div>
@@ -36,3 +36,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import "../../../../assets/scss/shared";
+
+.nav-link {
+  color: $color-navbar-link;
+
+  &:hover {
+    color: $color-navbar-link-hover;
+  }
+}
+</style>

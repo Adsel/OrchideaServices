@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="navbar-dark">
     <div class="logo-min">
       <img src="../../../../assets/image/logo.png" alt="logo.png" />
     </div>

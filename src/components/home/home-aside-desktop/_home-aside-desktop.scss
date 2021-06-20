@@ -31,6 +31,7 @@ aside {
         width: 100%;
         padding: 5px 0;
         display: block;
+        text-align: center;
 
         &:nth-child(1) {
           padding-top: 15px;
@@ -49,14 +50,11 @@ aside {
   }
 
   & > div > div > h1.prolog-header {
+    text-align: center;
     font-weight: $font-weight-medium;
     font-size: 2rem;
     margin: 0 0 0.5rem 0;
     padding: 0 2.5rem;
-
-    @include media('md', 'min') {
-      padding: 0 1.5rem;
-    }
   }
 
   & > div > div.prolog {
