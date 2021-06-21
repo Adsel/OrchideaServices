@@ -1,8 +1,17 @@
 <template>
-  <div class="result-column">
+  <div class="result-column" :id="'result' + number">
     <span class="number">{{ number }}.</span>
-    <div>reward</div>
-    <div>badge</div>
+    <div class="result-content">
+      <div class="reward-wrapper">
+        <div class="avatar">
+          <i class="reward-icon fas"></i>
+        </div>
+        <span class="reward"></span>
+      </div>
+      <div class="badge-wrapper">
+        <span class="badge badge-primary"></span>
+      </div>
+    </div>
   </div>
 </template>
 

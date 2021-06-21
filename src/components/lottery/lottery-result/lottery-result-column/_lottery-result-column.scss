@@ -2,14 +2,114 @@
 
 .result-column {
   display: flex;
-  justify-content: center;
   align-items: center;
   background-color: $color-dark;
+  margin: 0 auto;
+  width: 22%;
+  min-height: 50px;
+
+  @include media('xxl', 'min') {
+    width: 19%;
+  }
+
 
   & > .number {
     width: 50px;
+    min-width: 50px;
     padding: 5px 0;
     text-align: center;
     background-color: $color-gray;
+    color: $color-white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:is(.award-currency) > .number {
+    background-color: $color-green;
+  }
+
+  &:is(.award-gold) > .number {
+    color: $color-dark;
+    background-color: $color-yellow;
+  }
+
+  &:is(.award-ticket) > .number {
+    background-color: $color-aqua;
+  }
+
+  &:is(.award-shard) > .number {
+    background-color: $color-red;
+  }
+
+  .avatar {
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .result-content  {
+    width: 100%;
+    color: $color-white;
+    display: flex;
+    justify-content: space-between;
+
+    & > .reward-wrapper {
+      display: flex;
+
+      & > .reward {
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .badge-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+
+    & > .badge {
+      height: 20px;
+    }
+  }
+
+  &:is(.award-currency) .avatar {
+    color: $color-green;
+  }
+
+  &:is(.award-currency) .badge {
+    background-color: $color-green;
+  }
+
+  &:is(.award-gold) .avatar {
+    color: $color-yellow;
+  }
+
+  &:is(.award-gold) .badge {
+    background-color: $color-yellow;
+    color: $color-dark;
+  }
+
+  &:is(.award-ticket) .avatar {
+    color: $color-aqua;
+  }
+
+  &:is(.award-ticket) .badge {
+    background-color: $color-aqua;
+  }
+
+  &:is(.award-shard) .avatar {
+    color: $color-red;
+  }
+
+  &:is(.award-shard) .badge {
+    background-color: $color-red;
   }
 }

@@ -1,9 +1,11 @@
 <template>
   <HeaderMobile></HeaderMobile>
   <HeaderDesktop></HeaderDesktop>
-  <div class="container content">
-    <LotteryHeading></LotteryHeading>
-    <LotteryResult></LotteryResult>
+  <div class="content">
+    <div class="container">
+      <LotteryHeading></LotteryHeading>
+      <LotteryResult></LotteryResult>
+    </div>
   </div>
   <Footer></Footer>
 </template>
@@ -29,5 +31,15 @@ export default {
 <style lang="scss" scoped>
 .footer-mobile {
   display: block;
+}
+
+.content {
+  width: 100%;
+  background-image: url('../../assets/image/home_background.png');
+  background-size: cover;
+
+  & > .container {
+    max-width: 1400px;
+  }
 }
 </style>

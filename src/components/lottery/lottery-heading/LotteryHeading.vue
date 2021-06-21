@@ -8,12 +8,6 @@
       <span>{{ timeString.seconds }} sek. </span>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h2 class="text-center">Wyniki czerwiec 2021</h2>
-    </div>
-  </div>
 </template>
 
 <script>
