@@ -76,7 +76,6 @@ export default {
 
         resultDiv.querySelector('.reward-icon').classList.add(rewardIconClass);
         resultDiv.querySelector('.reward').innerHTML = reward;
-        resultDiv.querySelector('.badge').innerHTML = 'nickname';
       }
     };
 
@@ -104,10 +103,14 @@ export default {
 
     const drawNicknames = (nicknames) => {
       console.log('nicknames', nicknames);
-      // jQuery.each(nicknames, (index, nick) => {
-      //   const resultDiv =  $("#" + index);
-      //   resultDiv.find('.avatar').append('&nbsp; ' + nick);
-      // });
+      if (nicknames) {
+        for (const [index, nick] of Object.entries(nicknames)) {
+          console.log('IT', index, nick);
+          const resultDiv = document.getElementById(`result${index}`);
+          console.log('CHECK', `result${index}`);
+          resultDiv.querySelector('.badge').append(nick);
+        }
+      }
     };
 
     return {title}
