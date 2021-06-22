@@ -1,3 +1,4 @@
+$bootstrap-sm: 576px;
 $bootstrap-md: 768px;
 $bootstrap-lg: 992px;
 $bootstrap-xxl: 1400px;
@@ -35,6 +36,18 @@ $bootstrap-xxl: 1400px;
 
   @if $breakpoint == 'xxl' and $direction == 'max' {
     @media (max-width: calc(#{$bootstrap-xxl} - 1px)) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == 'sm' and $direction == 'min' {
+    @media (min-width: $bootstrap-sm) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == 'sm' and $direction == 'max' {
+    @media (max-width: calc(#{$bootstrap-sm} - 1px)) {
       @content;
     }
   }

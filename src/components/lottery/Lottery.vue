@@ -1,7 +1,7 @@
 <template>
   <HeaderMobile></HeaderMobile>
   <HeaderDesktop></HeaderDesktop>
-  <div class="content">
+  <div class="content pb-4">
     <div class="container">
       <LotteryHeading></LotteryHeading>
       <LotteryResultHeader :title="title"></LotteryResultHeader>
@@ -120,7 +120,7 @@ export default {
 
 <style lang="scss" scoped>
 .footer-mobile {
-  display: block;
+  display: flex;
 }
 
 .content {

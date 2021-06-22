@@ -4,9 +4,31 @@
   display: flex;
   align-items: center;
   background-color: $color-dark;
-  margin: 0 auto;
-  width: 22%;
+  overflow: hidden;
   min-height: 50px;
+  margin: 0 auto;
+  width: 60%;
+
+  @include media('sm', 'min') {
+    width: 40%;
+  }
+
+  @include media('md', 'min') {
+    $width: 30%;
+    width: $width;
+
+    &:last-child {
+      margin-left: calc((100% - (3 * #{$width})) / 6);
+    }
+  }
+
+  @include media('lg', 'min') {
+    width: 23.5%;
+
+    &:last-child {
+      margin-left: auto;
+    }
+  }
 
   @include media('xxl', 'min') {
     width: 19%;
@@ -63,7 +85,16 @@
       display: flex;
 
       & > .reward {
-        font-size: 0.875rem;
+        font-size: 1.125rem;
+
+        @include media('sm', 'max') {
+          font-size: 1rem;
+        }
+
+        @include media('sm', 'min') {
+          font-size: 0.875rem;
+        }
+
         margin-right: 8px;
         display: flex;
         align-items: center;
