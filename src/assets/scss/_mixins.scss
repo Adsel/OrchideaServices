@@ -1,5 +1,7 @@
+$bootstrap-sm: 576px;
 $bootstrap-md: 768px;
 $bootstrap-lg: 992px;
+$bootstrap-xxl: 1400px;
 
 @mixin media($breakpoint, $direction: 'min') {
   @if $breakpoint == 'md' and $direction == 'min' {
@@ -22,6 +24,30 @@ $bootstrap-lg: 992px;
 
   @if $breakpoint == 'lg' and $direction == 'max' {
     @media (max-width: calc(#{$bootstrap-lg} - 1px)) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == 'xxl' and $direction == 'min' {
+    @media (min-width: $bootstrap-xxl) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == 'xxl' and $direction == 'max' {
+    @media (max-width: calc(#{$bootstrap-xxl} - 1px)) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == 'sm' and $direction == 'min' {
+    @media (min-width: $bootstrap-sm) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == 'sm' and $direction == 'max' {
+    @media (max-width: calc(#{$bootstrap-sm} - 1px)) {
       @content;
     }
   }

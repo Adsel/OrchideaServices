@@ -1,11 +1,11 @@
 <template>
   <section>
     <nav>
-      <a href="#!lottery" class="card card-lottery">
+      <a href="/lottery" class="card card-lottery">
         <i class="fas fa-dollar-sign"></i>
         <span>Loteria</span>
       </a>
-      <a href="#!achievements" class="card card-achievements">
+      <a href="/achievements" class="card card-achievements">
         <i class="fas fa-trophy"></i>
         <span>Osiągnięcia</span>
       </a>

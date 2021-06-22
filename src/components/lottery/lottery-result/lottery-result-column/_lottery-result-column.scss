@@ -1,0 +1,148 @@
+@import "../../../../assets/scss/shared";
+
+.result-column {
+  display: flex;
+  align-items: center;
+  background-color: $color-dark;
+  overflow: hidden;
+  min-height: 50px;
+  margin: 0 auto;
+  width: 60%;
+
+  @include media('sm', 'min') {
+    width: 40%;
+  }
+
+  @include media('md', 'min') {
+    $width: 30%;
+    width: $width;
+
+    &:last-child {
+      margin-left: calc((100% - (3 * #{$width})) / 6);
+    }
+  }
+
+  @include media('lg', 'min') {
+    width: 23.5%;
+
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+
+  @include media('xxl', 'min') {
+    width: 19%;
+  }
+
+
+  & > .number {
+    width: 40px;
+    min-width: 40px;
+    padding: 5px 0;
+    text-align: center;
+    background-color: $color-gray;
+    color: $color-white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:is(.award-currency) > .number {
+    background-color: $color-green;
+  }
+
+  &:is(.award-gold) > .number {
+    color: $color-dark;
+    background-color: $color-yellow;
+  }
+
+  &:is(.award-ticket) > .number {
+    background-color: $color-aqua;
+  }
+
+  &:is(.award-shard) > .number {
+    background-color: $color-red;
+  }
+
+  .avatar {
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .result-content  {
+    width: 100%;
+    color: $color-white;
+    display: flex;
+    justify-content: space-between;
+
+    & > .reward-wrapper {
+      display: flex;
+
+      & > .reward {
+        font-size: 1.125rem;
+
+        @include media('sm', 'max') {
+          font-size: 1rem;
+        }
+
+        @include media('sm', 'min') {
+          font-size: 0.875rem;
+        }
+
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .badge-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+
+    & > .badge {
+      height: 20px;
+      background-color: $color-gray;
+    }
+  }
+
+  &:is(.award-currency) .avatar {
+    color: $color-green;
+  }
+
+  &:is(.award-currency) .badge {
+    background-color: $color-green;
+  }
+
+  &:is(.award-gold) .avatar {
+    color: $color-yellow;
+  }
+
+  &:is(.award-gold) .badge {
+    background-color: $color-yellow;
+    color: $color-dark;
+  }
+
+  &:is(.award-ticket) .avatar {
+    color: $color-aqua;
+  }
+
+  &:is(.award-ticket) .badge {
+    background-color: $color-aqua;
+  }
+
+  &:is(.award-shard) .avatar {
+    color: $color-red;
+  }
+
+  &:is(.award-shard) .badge {
+    background-color: $color-red;
+  }
+}
