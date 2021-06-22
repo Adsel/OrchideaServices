@@ -102,12 +102,9 @@ export default {
     };
 
     const drawNicknames = (nicknames) => {
-      console.log('nicknames', nicknames);
       if (nicknames) {
         for (const [index, nick] of Object.entries(nicknames)) {
-          console.log('IT', index, nick);
           const resultDiv = document.getElementById(`result${index}`);
-          console.log('CHECK', `result${index}`);
           resultDiv.querySelector('.badge').append(nick);
         }
       }
