@@ -1,22 +1,25 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "./components/home/Home";
-import Lottery from "./components/lottery/Lottery";
 
 const routes = [
     {
         path: "/",
         name: "Home",
-        component: Home,
+        component: () => import(/* webpackChunkName: "home" */ './components/home/Home.vue')
     },
     {
         path: "/lottery",
         name: "Lottery",
-        component: Lottery,
+        component: () => import(/* webpackChunkName: "lottery" */ './components/lottery/Lottery.vue')
+    },
+    {
+        path: "/achievements",
+        name: "Achievements",
+        component: () => import(/* webpackChunkName: "achievements" */ './components/achievements/Achievements.vue')
     },
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(process.env.BASE_URL),
     routes,
 });
 
