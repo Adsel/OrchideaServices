@@ -1,4 +1,4 @@
-const API_URL = '';
+const API_URL = 'server';
 
 const getRequest = (url) => {
     return new Promise((resolve, reject) => {
