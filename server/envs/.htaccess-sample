@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-Proto} =http
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+SetEnv DB_HOST db_host
+SetEnv DB_NAME db_name
+SetEnv DB_USER db_user
+SetEnv DB_PASS db_pass
+SetEnv API_PATH api_path
+SetEnv NICKNAMES_FILE_PATH /var/www/html

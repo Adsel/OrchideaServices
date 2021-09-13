@@ -78,7 +78,8 @@ class LotteryController {
         $nicknames = [];
         $month = '';
         $year = '';
-        $string = file_get_contents(__DIR__ ."/../nicknames.txt");
+        $nicknamesFilePath = getenv('NICKNAMES_FILE_PATH') . '/nicknames.txt';
+        $string = file_get_contents($nicknamesFilePath);
 
         $jsonIterator = new RecursiveIteratorIterator(
             new RecursiveArrayIterator(json_decode($string, TRUE, 512, JSON_UNESCAPED_UNICODE)),
@@ -111,7 +112,7 @@ class LotteryController {
         ];
 
         if (strtolower($month) == strtolower($this->MONTHS[$loterryMonth])) {
-            $result['nicknames'] = $nicknames;
+            $resultData['nicknames'] = $nicknames;
         }
 
         return JsonResponse::makeResponse($resultData);
