@@ -1,22 +1,16 @@
 <template>
-  <HeaderMobile></HeaderMobile>
-  <HeaderDesktop></HeaderDesktop>
-  <div class="content pb-4">
-    <div class="container">
-      <LotteryHeading></LotteryHeading>
-      <LotteryResultHeader :title="title"></LotteryResultHeader>
-      <LotteryResult></LotteryResult>
-    </div>
-  </div>
-  <Footer></Footer>
+  <Subpage>
+    <LotteryHeading></LotteryHeading>
+    <LotteryResultHeader :title="title"></LotteryResultHeader>
+    <LotteryResult></LotteryResult>
+  </Subpage>
 </template>
 
 <script>
-import HeaderMobile from "../layout/header/header-mobile/HeaderMobile.vue";
-import HeaderDesktop from "../layout/header/header-desktop/HeaderDesktop.vue";
-import Footer from "../layout/footer/footer-mobile/FooterMobile.vue";
 import LotteryResult from "./lottery-result/LotteryResult.vue";
 import LotteryHeading from "./lottery-heading/LotteryHeading.vue";
+import LotteryResultHeader from "./lottery-result/lottery-result-header/LotteryResultHeader.vue";
+import Subpage from "../layout/subpage/Subpage.vue";
 import {onMounted, ref} from "vue";
 import {
   CURRENCY_ICON_CLASS,
@@ -25,16 +19,14 @@ import {
   TICKET_ICON_CLASS
 } from "../../assets/js/variables/lottery";
 import {getAwards, getPlayerNicknames} from "../../assets/js/api/lottery";
-import LotteryResultHeader from "./lottery-result/lottery-result-header/LotteryResultHeader";
+
 
 export default {
   components: {
+    LotteryHeading,
     LotteryResultHeader,
-    HeaderMobile,
-    HeaderDesktop,
-    Footer,
     LotteryResult,
-    LotteryHeading
+    Subpage
   },
   setup() {
     const title = ref();
@@ -114,19 +106,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.footer-mobile {
-  display: flex;
-}
-
-.content {
-  width: 100%;
-  background-image: url('../../assets/image/home_background.png');
-  background-size: cover;
-
-  & > .container {
-    max-width: 1400px;
-  }
-}
-</style>
