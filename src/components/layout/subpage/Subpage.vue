@@ -25,11 +25,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../assets/scss/shared";
+
 .footer-mobile {
   display: flex;
 }
 
 .content {
+  @include media('xxl', 'min') {
+    min-height: calc(100vh - #{$header-height} - #{$footer-height});
+  }
+
   width: 100%;
   background-image: url('../../../assets/image/home_background.png');
   background-size: cover;
