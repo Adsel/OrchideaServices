@@ -1,0 +1,41 @@
+@import "../../../assets/scss/shared";
+
+.filter-wrapper {
+  background-color: $color-darker;
+
+  & > .filter-title {
+    background-color: $color-gray;
+    border-radius: 0 0 0.25rem 0.25rem;
+    padding: 0;
+    text-align: center;
+
+    & > .filter-title-header {
+      padding: 0.5rem;
+      font: normal normal medium 2rem/2.688rem HelveticaNeue-Medium;
+      letter-spacing: 0px;
+      color: $color-white;
+    }
+  }
+
+  .filters {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    & > .filter-operations {
+      width: 85%;
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 2rem;
+
+      & > button {
+        background-color: $color-yellow;
+        color: $color-darkest;
+        font-size: 1rem;
+        line-height: 1.125rem;
+      }
+    }
+  }
+}

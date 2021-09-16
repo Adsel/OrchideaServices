@@ -1,0 +1,57 @@
+@import "../../../../assets/scss/shared";
+
+$height: 1.5rem;
+$insideHeight: calc(#{$height} - 0.5rem);
+$transitionDuration: .4s;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: $height;
+
+  & input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.round-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $color-smoke;
+  -webkit-transition: $transitionDuration;
+  transition: $transitionDuration;
+  border-radius: $height;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: $insideHeight;
+    width: $insideHeight;
+    left: 0.25rem;
+    bottom: 0.25rem;
+    background-color: $color-white;
+    -webkit-transition: $transitionDuration;
+    transition: $transitionDuration;
+    border-radius: 50%;
+  }
+}
+
+input:checked + .round-slider {
+  background-color: $color-aqua;
+}
+
+input:checked + .round-slider:before {
+  -webkit-transform: translateX($insideHeight);
+  -ms-transform: translateX($insideHeight);
+  transform: translateX($insideHeight);
+}
+
+input:focus + .round-slider {
+  box-shadow: 0 0 0.063 $color-aqua;
+}

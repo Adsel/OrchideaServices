@@ -52,3 +52,17 @@ $bootstrap-xxl: 1400px;
     }
   }
 }
+
+
+@mixin customScrollbarY($color){
+  &::-webkit-scrollbar {
+     width: 0.25rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: $color transparent;
+}

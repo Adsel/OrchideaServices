@@ -1,0 +1,9 @@
+@import "../../../../assets/scss/shared";
+
+.by-player-switcher {
+  display: flex;
+  justify-content: space-between;
+  color: $color-white;
+  width: 85%;
+  margin-top: 2rem;
+}
