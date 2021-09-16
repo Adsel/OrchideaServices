@@ -1,0 +1,25 @@
+@import '../achievement-shared-filter';
+
+.difficult-filter {
+  display: flex;
+  justify-content: space-between;
+
+  & > .btn {
+    color: $color-white;
+    font-size: 1rem;
+    line-height: 1.125rem;
+    padding: 0.625rem;
+  }
+
+  & > .easy-btn {
+    background-color: $color-green;
+  }
+
+  & > .intermediate-btn {
+    background-color: $color-light-blue;
+  }
+
+  & > .hard-btn {
+    background-color: $color-red;
+  }
+}
