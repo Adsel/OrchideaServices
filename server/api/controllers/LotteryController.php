@@ -78,7 +78,7 @@ class LotteryController {
         $nicknames = [];
         $month = '';
         $year = '';
-        $nicknamesFilePath = getenv('NICKNAMES_FILE_PATH') . '/nicknames.txt';
+        $nicknamesFilePath = $_ENV['NICKNAMES_FILE_PATH'] . '/nicknames.txt';
         $string = file_get_contents($nicknamesFilePath);
 
         $jsonIterator = new RecursiveIteratorIterator(

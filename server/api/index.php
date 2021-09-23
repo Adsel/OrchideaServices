@@ -4,9 +4,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require "../../vendor/autoload.php";
+require "../lib/env-load.php";
 require "../lib/orm-config.php";
 
-$BASE_PATH = getenv('API_PATH');
+$BASE_PATH = $_ENV['API_PATH'];
 
 $router = new AltoRouter();
 $router->setBasePath($BASE_PATH);
