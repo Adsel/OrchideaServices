@@ -1,0 +1,64 @@
+@import "../../../../assets/scss/shared";
+
+.achievement {
+  background-color: $color-darker;
+  color: $color-white;
+  padding: 1.25rem;
+  width: 32%;
+  margin-bottom: 2%;
+  position: relative;
+
+  & > .achievement-title {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    border-radius: 0.375rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  & > .achievement-starting {
+    background-color: $color-green;
+  }
+
+  & > .achievement-main {
+    background-color: $color-light-blue;
+  }
+
+  & > .achievement-normal {
+    background-color: lighten($color-red, 10%);
+  }
+
+  & > .achievement-hard {
+    background-color: $color-red;
+  }
+
+  & > .achievement-laborious {
+    background-color: darken($color-red, 10%);
+  }
+
+  .award-currency {
+    color: $color-green;
+  }
+
+  .award-coins {
+    color: $color-yellow;
+  }
+
+  & > .achievement-state {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    & > .fas {
+      font-size: 2rem;
+    }
+
+    & > .fa-check {
+      color: $color-green;
+    }
+
+    & > .fa-times {
+      color: $color-red;
+    }
+  }
+}

@@ -2,24 +2,36 @@
 
 .difficult-filter {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 
   & > .btn {
     color: $color-white;
     font-size: 1rem;
     line-height: 1.125rem;
     padding: 0.625rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
   }
 
-  & > .easy-btn {
+  & > .starting-btn {
     background-color: $color-green;
   }
 
-  & > .intermediate-btn {
+  & > .main-btn {
     background-color: $color-light-blue;
+  }
+
+  & > .normal-btn {
+    background-color: lighten($color-red, 10%);
   }
 
   & > .hard-btn {
     background-color: $color-red;
   }
+
+  & > .laborious-btn {
+    background-color: darken($color-red, 10%);
+  }
+
 }

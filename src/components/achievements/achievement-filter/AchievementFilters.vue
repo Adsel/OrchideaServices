@@ -5,8 +5,8 @@
     </div>
 
     <div class="filters">
-      <AchievementSingleFilter title="Nazwa zadania" description="Pozostaw puste, aby wyświetlić wszystkie"
-                               placeholder="Nazwa"></AchievementSingleFilter>
+      <AchievementSingleFilter title="Treść zadania" description="Pozostaw puste, aby wyświetlić wszystkie"
+                               placeholder="Treść"></AchievementSingleFilter>
 
       <AchievementDifficultyFilter></AchievementDifficultyFilter>
 

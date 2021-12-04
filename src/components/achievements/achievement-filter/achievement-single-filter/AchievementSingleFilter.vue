@@ -5,8 +5,8 @@
     </label>
 
     <div class="single-filter">
-      <input type="text" :id="inputId" :placeholder="!!placeholder ? placeholder : ''" />
-      <i class="fas fa-times-circle clear-icon"></i>
+      <input type="text" v-model="inputData" :id="inputId" :placeholder="!!placeholder ? placeholder : ''" />
+      <i class="fas fa-times-circle clear-icon" @click="resetData"></i>
     </div>
 
     <small v-if="!!description">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {computed} from "vue";
+import {computed, ref} from "vue";
 
 export default {
   name: 'AchievementSingleFilter',
@@ -35,11 +35,17 @@ export default {
     }
   },
   setup(props) {
+    const inputData = ref('');
+
     const inputId = computed(() => {
       return props.title.toLowerCase().replace(' ', '-');
     });
 
-    return { inputId }
+    const resetData = () => {
+      inputData.value = '';
+    };
+
+    return { inputData, inputId, resetData }
   }
 }
 </script>
