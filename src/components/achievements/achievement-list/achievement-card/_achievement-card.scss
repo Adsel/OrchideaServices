@@ -8,6 +8,10 @@
   margin-bottom: 2%;
   position: relative;
 
+  &-card__description {
+    margin-top: 1rem;
+  }
+
   & > .achievement-title {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -48,6 +52,7 @@
     position: absolute;
     right: 0;
     bottom: 0;
+    margin-right: 0.25rem;
 
     & > .fas {
       font-size: 2rem;

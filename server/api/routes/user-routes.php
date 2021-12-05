@@ -18,6 +18,6 @@ $router->map('GET', '/index.php/achievements/available', function () {
     echo (new AchievementController())->getAvailableAchievements();
 });
 
-$router->map('GET', '/index.php/achievements/player/[:key]', function (string $key) {
-    echo (new AchievementController())->getPlayerAchievements($key);
+$router->map('POST', '/index.php/achievements/filtered', function () {
+    echo (new AchievementController())->getFilteredAchievements();
 });

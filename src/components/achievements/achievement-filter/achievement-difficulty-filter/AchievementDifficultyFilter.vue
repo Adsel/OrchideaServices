@@ -8,7 +8,7 @@
       <button class="btn hard-btn">Trudne</button>
       <button class="btn laborious-btn">Pracochłonne</button>
     </div>
-    <small>Wybierz rodzaj</small>
+    <small>Wybierz rodzaj (dostępne wkrótce)</small>
   </div>
 </template>
 <script>

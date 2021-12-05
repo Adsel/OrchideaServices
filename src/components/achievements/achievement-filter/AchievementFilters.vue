@@ -5,8 +5,8 @@
     </div>
 
     <div class="filters">
-      <AchievementSingleFilter title="Treść zadania" description="Pozostaw puste, aby wyświetlić wszystkie"
-                               placeholder="Treść"></AchievementSingleFilter>
+      <AchievementSingleFilter title="Treść zadania" description="Pozostaw puste, aby wyświetlić wszystkie (dostępne wkrótce)"
+                               placeholder="Treść" ref="profileIdFilter"></AchievementSingleFilter>
 
       <AchievementDifficultyFilter></AchievementDifficultyFilter>
 
@@ -14,15 +14,15 @@
                                label="Szukaj po graczu"></AchievementPlayerToggle>
 
       <template v-if="isFilteredByPlayer">
-        <AchievementSingleFilter title="Nick gracza" description="Pozostaw puste, aby wyświetlić wszystkie"
+        <AchievementSingleFilter title="Nick gracza" description="Pozostaw puste, aby wyświetlić wszystkie (dostępne wkrótce)"
                                  placeholder="Nick"></AchievementSingleFilter>
 
         <AchievementSingleFilter title="ID profilu" description="Pozostaw puste, aby wyświetlić wszystkie"
-                                 placeholder="ID"></AchievementSingleFilter>
+                                 placeholder="ID" ref="nicknameFilter"></AchievementSingleFilter>
       </template>
 
       <div class="filter-operations">
-        <button class="btn">
+        <button class="btn" @click="filter">
           <i class="fas fa-search"></i>
           Ustaw filtr
         </button>
@@ -39,19 +39,31 @@ import {ref} from "vue";
 
 export default {
   name: 'AchievementFilters',
+  emits: [
+      'filter'
+  ],
   components: {
     AchievementDifficultyFilter,
     AchievementPlayerToggle,
     AchievementSingleFilter
   },
-  setup() {
+  setup(props, context) {
     const isFilteredByPlayer = ref(false);
+    const profileIdFilter = ref('');
+    const nicknameFilter = ref('');
 
     const filterByPlayer = (value) => {
       isFilteredByPlayer.value = value;
     };
 
-    return { isFilteredByPlayer, filterByPlayer }
+    const filter = () => {
+      context.emit('filter', {
+        description: profileIdFilter.value.getInputValue(),
+        profile_id: isFilteredByPlayer.value ? nicknameFilter.value.getInputValue(): null
+      });
+    };
+
+    return { isFilteredByPlayer, profileIdFilter, nicknameFilter, filterByPlayer, filter }
   }
 }
 </script>
