@@ -1,0 +1,32 @@
+@import "../../../../assets/scss/shared";
+
+.achievement {
+  &__description {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    @extend %achievement-type;
+
+    & > span {
+      @extend %achievement-status;
+
+      .fas {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  &__title {
+    padding: 0 0.25rem;
+    font-weight: 500;
+    font-size: 1.25rem;
+    border-radius: .375rem;
+    margin-right: 0.5rem;
+  }
+}
+
+.switch {
+  margin: 0;
+  align-self: center;
+}

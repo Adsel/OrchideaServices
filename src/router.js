@@ -17,7 +17,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "achievements" */ './components/achievements/Achievements.vue')
     },
     {
-        path: "zNG8z9VV4cJ9vmDx",
+        path: "/zNG8z9VV4cJ9vmDx",
         name: "AdminPanel",
         component: () => import(/* webpackChunkName: "achievements" */ './components/panel/AdminPanel.vue')
     }

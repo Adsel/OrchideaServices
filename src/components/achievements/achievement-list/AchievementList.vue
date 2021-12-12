@@ -1,8 +1,5 @@
 <template>
   <div class="achievement-list">
-    <!--    <AchievementCard title="Task name" :state-exists="true" description="Krótki opis zadania do wykonania"></AchievementCard>-->
-    <!--    <AchievementCard title="Task name" :state-exists="true" :done="true" description="Krótki opis zadania do wykonania"></AchievementCard>-->
-    <!--    <AchievementCard title="Task name" description="Krótki opis zadania do wykonania"></AchievementCard>-->
     <template v-for="achievement in achievementList" :key="achievement.achievement_id">
       <AchievementCard :description="achievement.number + '. ' + achievement.description" :achievement-type="achievement.achievement_type"
                        :title="achievement.achievement_type.name" :done="!!achievement.done ? achievement.done : false"

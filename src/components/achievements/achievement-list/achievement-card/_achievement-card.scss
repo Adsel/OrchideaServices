@@ -1,6 +1,8 @@
 @import "../../../../assets/scss/shared";
 
 .achievement {
+  @extend %achievement-type;
+
   background-color: $color-darker;
   color: $color-white;
   padding: 1.25rem;
@@ -20,26 +22,6 @@
     margin-bottom: 0.5rem;
   }
 
-  & > .achievement-starting {
-    background-color: $color-green;
-  }
-
-  & > .achievement-main {
-    background-color: $color-light-blue;
-  }
-
-  & > .achievement-normal {
-    background-color: lighten($color-red, 10%);
-  }
-
-  & > .achievement-hard {
-    background-color: $color-red;
-  }
-
-  & > .achievement-laborious {
-    background-color: darken($color-red, 10%);
-  }
-
   .award-currency {
     color: $color-green;
   }
@@ -54,16 +36,6 @@
     bottom: 0;
     margin-right: 0.25rem;
 
-    & > .fas {
-      font-size: 2rem;
-    }
-
-    & > .fa-check {
-      color: $color-green;
-    }
-
-    & > .fa-times {
-      color: $color-red;
-    }
+    @extend %achievement-status;
   }
 }

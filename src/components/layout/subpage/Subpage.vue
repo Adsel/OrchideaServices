@@ -1,6 +1,6 @@
 <template>
   <HeaderMobile></HeaderMobile>
-  <HeaderDesktop></HeaderDesktop>
+  <HeaderDesktop :admin-side="adminSide"></HeaderDesktop>
   <div class="content pb-4">
     <div class="container">
       <slot></slot>
@@ -21,6 +21,13 @@ export default {
     HeaderDesktop,
     Footer
   },
+  props: {
+    adminSide: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  }
 }
 </script>
 
