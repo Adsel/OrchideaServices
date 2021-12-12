@@ -34,7 +34,7 @@ export default {
     };
 
     const getValue = () => {
-      return isChecked;
+      return isChecked.value;
     };
 
     return { isChecked, getValue, restoreValue, emitChangeEvent }

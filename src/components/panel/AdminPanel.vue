@@ -1,8 +1,7 @@
 <template>
   <Subpage :admin-side="true">
     <div class="row p-3">
-<!--      <div v-if="false || enteredPassword !== PASSWORD" class="admin-panel__login-wrapper p-3">-->
-      <div v-if="false" class="admin-panel__login-wrapper p-3">
+      <div v-if="enteredPassword !== PASSWORD" class="admin-panel__login-wrapper p-3">
         <div class="admin-panel__login">
           <AchievementSingleFilter title="Hasło do panelu" description="Dostęp tylko dla upoważnionych"
                                    placeholder="Hasło" ref="passwordInput"></AchievementSingleFilter>
@@ -67,6 +66,7 @@ export default {
     };
 
     const loadAchievements = () => {
+      achievements.value = [];
       enteredProfileIdInput.value = '';
       const profileId = profileIdInput.value.getInputValue();
       const filterData = {profile_id: profileId};

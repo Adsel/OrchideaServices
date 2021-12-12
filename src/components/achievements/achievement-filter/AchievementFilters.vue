@@ -11,11 +11,11 @@
       <AchievementPlayerToggle @filter-by-players="filterByPlayer($event)"
                                label="Szukaj po graczu"></AchievementPlayerToggle>
       <template v-if="isFilteredByPlayer">
-        <AchievementSingleFilter title="Nick gracza"
-                                 description="Pozostaw puste, aby wyświetlić wszystkie (dostępne wkrótce)"
-                                 placeholder="Nick"></AchievementSingleFilter>
         <AchievementSingleFilter title="ID profilu" description="Pozostaw puste, aby wyświetlić wszystkie"
                                  placeholder="ID" ref="nicknameFilter"></AchievementSingleFilter>
+        <AchievementSingleFilter title="Nick gracza*"
+                                 description="Pozostaw puste, aby wyświetlić wszystkie (dostępne wkrótce)"
+                                 placeholder="Nick"></AchievementSingleFilter>
       </template>
       <div class="filter-operations">
         <button class="btn" @click="filter">

@@ -13,6 +13,7 @@ $router = new AltoRouter();
 $router->setBasePath($BASE_PATH);
 
 require_once "./routes/user-routes.php";
+require_once "./routes/admin-routes.php";
 
 // === MATCHING PATHS ===
 $match = $router->match();

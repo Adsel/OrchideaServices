@@ -74,8 +74,9 @@ export default {
       };
       changeAchievementState(achievementData).then((results) => {
         console.log(`changeAchievementState(${achievementData})`, results);
+        event.achievement.done =  event.toggler.value.getValue();
       }).catch((err) => {
-        console.log(`getFilteredAchievements(${achievementData}) err`, err);
+        console.log(`changeAchievementState() err`, achievementData, err);
         cancelAction();
       });
     };
