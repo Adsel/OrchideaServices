@@ -8,14 +8,16 @@ class LotteryController {
     ];
     private $TICKETS_COUNT = 100;
     private $REWARDS = [
-        "strzal", "strzal", "strzal", "strzal",
+        "strzal x2", "strzal x2",
+        "strzal", "strzal", "strzal", "strzal", "strzal",
         "200m",
+        "125m", "125m",
         "75m", "75m", "75m", "75m",
         "25m", "25m", "25m", "25m", "25m", "25m",
-        "500 kw.", "500 kw.", "500 kw.",
-        "100 kw.", "100 kw.", "100 kw.", "100 kw.", "100 kw.",
-        "100 kw.", "100 kw.", "100 kw.", "100 kw.", "100 kw.",
-        "odlamek postaci", "odlamek postaci", "odlamek postaci", "odlamek postaci", "odlamek postaci", "odlamek postaci", "odlamek postaci"
+        "80 kw.", "80 kw.",
+        "40 kw.", "40 kw.", "40 kw.", "40 kw.",
+        "20 kw.", "20 kw.", "20 kw.", "20 kw.", "20 kw.", "20 kw.",
+        "10 kw.", "10 kw.", "10 kw.", "10 kw.", "10 kw.", "10 kw.", "10 kw.", "10 kw."
     ];
 
     public function getTimer() {

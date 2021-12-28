@@ -52,9 +52,9 @@ export default {
           resultDiv.classList.add('award-shard');
           reward = 'odłamek postaci'
           rewardIconClass = SHARD_ICON_CLASS;
-        } else if (rewardVal == "strzal") {
+        } else if (rewardVal === 'strzal' || rewardVal === 'strzal x2') {
           resultDiv.classList.add('award-ticket');
-          reward = 'dodatkowy strzał';
+          reward = rewardVal === 'strzal' ? 'dodatkowy strzał' : 'dodatkowy strzał x2';
           rewardIconClass = TICKET_ICON_CLASS;
         } else if (rewardVal.indexOf("kw.") > -1 || rewardVal.indexOf('zniżki') > -1) {
           resultDiv.classList.add('award-currency');
