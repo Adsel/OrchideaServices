@@ -1,22 +1,7 @@
 <?php
 
-class AchievementController
+class AchievementController extends ApiController
 {
-    private $bodyData;
-
-    public function __construct()
-    {
-        // TODO:
-        // split into controller
-        header('Content-type: application/json');
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Headers: Token');
-        header('Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE');
-
-        $json = file_get_contents('php://input');
-        $this->bodyData = !!$json ? (json_decode($json)->data) : [];
-    }
-
     public function getAvailableAchievements()
     {
         return JsonResponse::makeResponse([

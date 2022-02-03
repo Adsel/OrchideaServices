@@ -1,9 +1,12 @@
 <template>
   <Subpage :admin-side="true">
     <div class="row p-3">
-      <div v-if="enteredPassword !== PASSWORD" class="admin-panel__login-wrapper p-3">
+      <div v-if="!loggedAdmin" class="admin-panel__login-wrapper p-3">
         <div class="admin-panel__login">
-          <AchievementSingleFilter title="Hasło do panelu" description="Dostęp tylko dla upoważnionych"
+          <AchievementSingleFilter title="Login"
+                                   placeholder="Login" ref="loginInput"></AchievementSingleFilter>
+          <AchievementSingleFilter title="Hasło" description="Dostęp tylko dla upoważnionych"
+                                   :passwordType="true"
                                    placeholder="Hasło" ref="passwordInput"></AchievementSingleFilter>
           <div class="admin-panel__login-cta">
             <button class="btn" @click="login">
@@ -15,6 +18,12 @@
       </div>
       <template v-else>
         <div class="admin-panel__wrapper col-md-12 px-5">
+          <div class="px-5 pb-1 pt-3">
+          <span class="admin-panel__welcome">
+            Zalogowany jako
+            <span class="admin-panel__welcome-name">{{ loggedAdmin.visible_name }}</span>.
+          </span>
+          </div>
           <div class="admin-panel__management">
             <AchievementSingleFilter title="ID profilu gracza" description="Wprowadź identyfikator profilu gracza"
                                      placeholder="ID profilu" ref="profileIdInput"></AchievementSingleFilter>
@@ -41,6 +50,7 @@ import AchievementSingleFilter
   from "../achievements/achievement-filter/achievement-single-filter/AchievementSingleFilter";
 import PanelAchievementList from "./panel-achievement-list/PanelAchievementList";
 import {getFilteredAchievements} from "../../assets/js/api/achievement";
+import {loginAdministrator} from "@/assets/js/api/auth";
 
 export default {
   components: {
@@ -49,20 +59,32 @@ export default {
     Subpage
   },
   setup() {
-    // TODO:
-    // replace with JWT token
-    const PASSWORD = '>p@V2V<(w4Gcym!$';
-    const enteredPassword = ref('');
+    const loggedAdmin = ref(null);
     const passwordInput = ref('');
+    const loginInput = ref('');
     const profileIdInput = ref('');
     const enteredProfileIdInput = ref('');
     const achievements = ref([]);
 
     const login = () => {
-      enteredPassword.value = passwordInput.value.getInputValue();
-      if (enteredPassword.value !== PASSWORD) {
-        alert('Błędne hasło');
-      }
+      const authData = {
+        login: loginInput.value.getInputValue(),
+        password: passwordInput.value.getInputValue()
+      };
+
+      loggedAdmin.value = null;
+      loginAdministrator(authData).then((results) => {
+        // console.error(`loginAdministrator(${authData})`, results);
+
+        if (!!results && !!results.status && !!results.admin && !!results.token) {
+          loggedAdmin.value = results.admin;
+        }
+      }).catch((err) => {
+        // TODO:
+        // Modal
+        alert('Błąd logowania do panelu administratora!');
+        console.error(`loginAdministrator(${authData}) err`, err);
+      });
     };
 
     const loadAchievements = () => {
@@ -70,6 +92,7 @@ export default {
       enteredProfileIdInput.value = '';
       const profileId = profileIdInput.value.getInputValue();
       const filterData = {profile_id: profileId};
+
       getFilteredAchievements(filterData).then((results) => {
         enteredProfileIdInput.value = profileId;
         // console.log(`getFilteredAchievements(${filterData})`, results);
@@ -82,12 +105,12 @@ export default {
     };
 
     return {
-      enteredPassword,
       achievements,
+      loginInput,
       passwordInput,
       profileIdInput,
       enteredProfileIdInput,
-      PASSWORD,
+      loggedAdmin,
       login,
       loadAchievements
     };
@@ -149,6 +172,16 @@ export default {
   &__management {
     width: 40%;
     margin: auto;
+  }
+
+  &__welcome {
+    color: $color-ash;
+    font-size: 1.125rem;
+  }
+
+  &__welcome-name {
+    color: $color-yellow;
+    font-weight: bold;
   }
 }
 

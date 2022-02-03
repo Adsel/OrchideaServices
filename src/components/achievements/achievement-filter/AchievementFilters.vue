@@ -6,7 +6,7 @@
     <div class="filters">
       <AchievementSingleFilter title="Treść zadania"
                                description="Pozostaw puste, aby wyświetlić wszystkie (dostępne wkrótce)"
-                               placeholder="Treść" ref="profileIdFilter"></AchievementSingleFilter>
+                               placeholder="Treść" ref="achievementContent"></AchievementSingleFilter>
       <AchievementDifficultyFilter></AchievementDifficultyFilter>
       <AchievementPlayerToggle @filter-by-players="filterByPlayer($event)"
                                label="Szukaj po graczu"></AchievementPlayerToggle>
@@ -45,7 +45,7 @@ export default {
   },
   setup(props, context) {
     const isFilteredByPlayer = ref(false);
-    const profileIdFilter = ref('');
+    const achievementContent = ref('');
     const nicknameFilter = ref('');
 
     const filterByPlayer = (value) => {
@@ -54,12 +54,12 @@ export default {
 
     const filter = () => {
       context.emit('filter', {
-        description: profileIdFilter.value.getInputValue(),
+        description: achievementContent.value.getInputValue(),
         profile_id: isFilteredByPlayer.value ? nicknameFilter.value.getInputValue() : null
       });
     };
 
-    return {isFilteredByPlayer, profileIdFilter, nicknameFilter, filterByPlayer, filter}
+    return {isFilteredByPlayer, achievementContent, nicknameFilter, filterByPlayer, filter}
   }
 }
 </script>

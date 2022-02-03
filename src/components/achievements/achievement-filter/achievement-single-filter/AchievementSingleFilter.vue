@@ -4,7 +4,7 @@
       {{ title }}
     </label>
     <div class="single-filter">
-      <input type="text" v-model="inputData" :id="inputId" :placeholder="!!placeholder ? placeholder : ''"/>
+      <input :type="passwordType ? 'password' : 'text'" v-model="inputData" :id="inputId" :placeholder="!!placeholder ? placeholder : ''"/>
       <i class="fas fa-times-circle clear-icon" @click="resetData"></i>
     </div>
     <small v-if="!!description">
@@ -32,6 +32,11 @@ export default {
     placeholder: {
       required: false,
       type: String
+    },
+    passwordType: {
+      required: false,
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
