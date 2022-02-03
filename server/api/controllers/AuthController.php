@@ -4,6 +4,12 @@ class AuthController extends ApiController
 {
     const EXCEPTION_MESSAGE_MISSING_DATA = 'Proszę wypełnić wszystkie pola!';
     const EXCEPTION_MESSAGE_ADMINISTRATOR_NOT_AUTHORIZED = 'Błędne dane logowania!';
+    const EXCEPTION_MESSAGE_ADMINISTRATOR_NOT_FOUND = 'Brak administratora o podanym loginie!';
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Login administrator to admin panel
@@ -21,7 +27,11 @@ class AuthController extends ApiController
         $password = $this->bodyData->password;
         $administratorDB = Administrator::where('login', $login)->first();
 
-        if (!$administratorDB || password_verify($password, $administratorDB->password)) {
+        if (!$administratorDB) {
+            throw new Exception(self::EXCEPTION_MESSAGE_ADMINISTRATOR_NOT_FOUND);
+        }
+
+        if (!password_verify($password, $administratorDB->password)) {
             throw new Exception(self::EXCEPTION_MESSAGE_ADMINISTRATOR_NOT_AUTHORIZED);
         }
 

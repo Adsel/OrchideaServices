@@ -2,7 +2,7 @@
 
 class ApiController
 {
-    /** @var object $bodyData */
+    /** @var $bodyData */
     protected $bodyData;
 
     /**
