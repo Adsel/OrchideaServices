@@ -2,19 +2,7 @@
   <Subpage :admin-side="true">
     <div class="row p-3">
       <div v-if="!loggedAdmin" class="admin-panel__login-wrapper p-3">
-        <div class="admin-panel__login">
-          <AchievementSingleFilter title="Login"
-                                   placeholder="Login" ref="loginInput"></AchievementSingleFilter>
-          <AchievementSingleFilter title="Hasło" description="Dostęp tylko dla upoważnionych"
-                                   :passwordType="true"
-                                   placeholder="Hasło" ref="passwordInput"></AchievementSingleFilter>
-          <div class="admin-panel__login-cta">
-            <button class="btn" @click="login">
-              <i class="fas fa-search"></i>
-              Zaloguj się
-            </button>
-          </div>
-        </div>
+        <AdminPanelAuth @loggedAdmin="successfulLogin"></AdminPanelAuth>
       </div>
       <template v-else>
         <div class="admin-panel__wrapper col-md-12 px-5">
@@ -27,7 +15,7 @@
           <div class="admin-panel__management">
             <AchievementSingleFilter title="ID profilu gracza" description="Wprowadź identyfikator profilu gracza"
                                      placeholder="ID profilu" ref="profileIdInput"></AchievementSingleFilter>
-            <div class="admin-panel__login-cta">
+            <div class="admin-panel__achievement-cta">
               <button class="btn" @click="loadAchievements">
                 <i class="fas fa-search"></i>
                 Pokaż osiągnięcia gracza
@@ -44,48 +32,35 @@
   </Subpage>
 </template>
 <script>
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
 import Subpage from "../layout/subpage/Subpage";
+import AdminPanelAuth from "@/components/panel/panel-auth/AdminPanelAuth";
 import AchievementSingleFilter
   from "../achievements/achievement-filter/achievement-single-filter/AchievementSingleFilter";
 import PanelAchievementList from "./panel-achievement-list/PanelAchievementList";
-import {getFilteredAchievements} from "../../assets/js/api/achievement";
-import {loginAdministrator} from "@/assets/js/api/auth";
+import {getFilteredAchievements} from "@/assets/js/api/achievement";
+import {LOCAL_STORAGE_KEY_LOGGED_ADMIN} from "@/assets/js/variables/auth";
 
 export default {
   components: {
+    AdminPanelAuth,
     PanelAchievementList,
     AchievementSingleFilter,
     Subpage
   },
   setup() {
     const loggedAdmin = ref(null);
-    const passwordInput = ref('');
-    const loginInput = ref('');
     const profileIdInput = ref('');
     const enteredProfileIdInput = ref('');
     const achievements = ref([]);
 
-    const login = () => {
-      const authData = {
-        login: loginInput.value.getInputValue(),
-        password: passwordInput.value.getInputValue()
-      };
-
-      loggedAdmin.value = null;
-      loginAdministrator(authData).then((results) => {
-        // console.error(`loginAdministrator(${authData})`, results);
-
-        if (!!results && !!results.status && !!results.admin && !!results.token) {
-          loggedAdmin.value = results.admin;
-        }
-      }).catch((err) => {
-        // TODO:
-        // Modal
-        alert('Błąd logowania do panelu administratora!');
-        console.error(`loginAdministrator(${authData}) err`, err);
-      });
-    };
+    onMounted(() => {
+      const loggedAdminString = localStorage.getItem(LOCAL_STORAGE_KEY_LOGGED_ADMIN);
+      if (loggedAdminString) {
+        const loggedAdminObject = JSON.parse(loggedAdminString);
+        loggedAdmin.value = loggedAdminObject;
+      }
+    });
 
     const loadAchievements = () => {
       achievements.value = [];
@@ -104,14 +79,16 @@ export default {
       });
     };
 
+    const successfulLogin = (admin) => {
+      loggedAdmin.value = admin;
+    };
+
     return {
       achievements,
-      loginInput,
-      passwordInput,
       profileIdInput,
       enteredProfileIdInput,
       loggedAdmin,
-      login,
+      successfulLogin,
       loadAchievements
     };
   }
@@ -141,27 +118,6 @@ export default {
     margin: auto;
   }
 
-  &__login {
-    width: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  &__login-cta {
-    display: flex;
-    justify-content: flex-end;
-    margin: 1rem 0;
-
-    & > button {
-      background-color: $color-red;
-      color: $color-white;
-      font-size: 1rem;
-      line-height: 1.125rem;
-    }
-  }
-
   &__wrapper {
     @extend %admin-panel;
     @include customScrollbarY($color-dark);
@@ -182,6 +138,19 @@ export default {
   &__welcome-name {
     color: $color-yellow;
     font-weight: bold;
+  }
+
+  &__achievement-cta {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 0;
+
+    & > button {
+      background-color: $color-red;
+      color: $color-white;
+      font-size: 1rem;
+      line-height: 1.125rem;
+    }
   }
 }
 

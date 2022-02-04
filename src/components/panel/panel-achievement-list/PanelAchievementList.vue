@@ -58,7 +58,6 @@ export default {
       console.log('changeAchievementStatusModal', event);
       achievementActionModal.value.setAchievement(event.achievement, event.toggler);
       achievementActionModal.value.toggleModal();
-
     };
 
     const cancelAction = (toggler) => {
