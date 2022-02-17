@@ -8,9 +8,9 @@ const getFilteredAchievements = (filterData) => {
     return postRequest(`${API_URL}/api/index.php/achievements/filtered`, filterData);
 };
 
-const changeAchievementState = (achievementData) => {
+const changeAchievementsStates = (achievementsData) => {
     // TODO: make PUT Request
-    return postRequest(`${API_URL}/api/index.php/achievement/status`, achievementData);
+    return postRequest(`${API_URL}/api/index.php/achievements/statuses`, achievementsData);
 };
 
-export {changeAchievementState, getAchievements, getFilteredAchievements}
+export {changeAchievementsStates, getAchievements, getFilteredAchievements}

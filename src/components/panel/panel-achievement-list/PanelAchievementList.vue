@@ -1,5 +1,5 @@
 <template>
-  <div v-if="achievementList.length > 0" class="achievement-list__wrapper mt-2">
+  <div v-if="achievementList.length > 0" class="achievement-list__wrapper">
     <h1 class="achievement-list__header">
       Lista osiągnięć
     </h1>
@@ -10,19 +10,28 @@
     <div v-for="achievement in achievementList" :key="achievement.achievement_id" class="achievement__details"
          v-bind:class="getAchievementDivClasses(achievement.achievement_type)">
       <PanelAchievementStatus :achievement="achievement" :profile-id="profileId"
-                              @change-achievement-status="changeAchievementStatusModal"></PanelAchievementStatus>
+                              @change-achievement-status="changedAchievementValue"></PanelAchievementStatus>
     </div>
     <AchievementStateConfirmation ref="achievementActionModal" @cancel-action="cancelAction"
                                   @execute-action="executeAction"></AchievementStateConfirmation>
+    <div class="achievement-list__achievement-cta">
+      <button class="btn" @click="changeAchievementStatusModal">
+        <i class="fa-solid fa-square-check"></i>
+        Zatwierdź zmiany
+      </button>
+    </div>
   </div>
 </template>
 <script>
 import PanelAchievementStatus from "./panel-achievement-status/PanelAchievementStatus";
 import AchievementStateConfirmation from "./AchievementStateConfirmation";
-import {ref} from "vue";
-import {changeAchievementState} from "../../../assets/js/api/achievement";
+import {watch, ref} from "vue";
+import {changeAchievementsStates} from "@/assets/js/api/achievement";
 
 export default {
+  emits: [
+    'changed-statuses'
+  ],
   components: {
     PanelAchievementStatus,
     AchievementStateConfirmation
@@ -39,8 +48,13 @@ export default {
       default: ''
     },
   },
-  setup(props) {
+  setup(props, context) {
     const achievementActionModal = ref(null);
+    const achievementListBefore = ref([]);
+
+    watch(() => props.achievementList, (newState) => {
+      achievementListBefore.value = JSON.parse(JSON.stringify(newState));
+    });
 
     // TODO:
     // eliminate duplicate and split into pure function or helper or sth
@@ -54,33 +68,62 @@ export default {
       }
     };
 
-    const changeAchievementStatusModal = (event) => {
-      console.log('changeAchievementStatusModal', event);
-      achievementActionModal.value.setAchievement(event.achievement, event.toggler);
+    const changeAchievementStatusModal = () => {
+      const changed = [];
+      props.achievementList.forEach((achievement) => {
+        const oldState = achievementListBefore.value.find((achievementOld) => {
+          return achievementOld.achievement_id === achievement.achievement_id;
+        });
+
+        if (oldState && oldState.done !== achievement.done) {
+          changed.push(achievement);
+        }
+      });
+
+
+      achievementActionModal.value.setChangedAchievements(changed);
       achievementActionModal.value.toggleModal();
     };
 
-    const cancelAction = (toggler) => {
-      console.log('cancelAction', toggler.value);
-      toggler.value.restoreValue();
+    const cancelAction = () => {
+      // console.log('cancelAction');
     };
 
     const executeAction = (event) => {
       const achievementData = {
         profile_id: props.profileId,
-        achievement_id: event.achievement.achievement_id,
-        status: event.toggler.value.getValue()
+        achievements: event.achievements,
       };
-      changeAchievementState(achievementData).then((results) => {
-        console.log(`changeAchievementState(${achievementData})`, results);
-        event.achievement.done =  event.toggler.value.getValue();
+      changeAchievementsStates(achievementData).then(() => {
+        // console.log(`changeAchievementsStates(${achievementData})`, results);
+        context.emit('changed-statuses');
       }).catch((err) => {
-        console.log(`changeAchievementState() err`, achievementData, err);
+        console.log(`changeAchievementsStates() err`, achievementData, err);
         cancelAction();
       });
     };
 
-    return {achievementActionModal, cancelAction, changeAchievementStatusModal, executeAction, getAchievementDivClasses};
+    const changedAchievementValue = (event) => {
+      const changedAchievementId = event.achievement.achievement_id;
+      const changedAchievementValue = event.toggler.value.getValue();
+
+      const found = props.achievementList.filter((achievement) => achievement.achievement_id === changedAchievementId);
+      if (found?.length > 0) {
+        found[0].done = changedAchievementValue;
+      } else {
+        console.error('failed to change achievement state');
+      }
+      //  achievementId
+    };
+
+    return {
+      achievementActionModal,
+      cancelAction,
+      changeAchievementStatusModal,
+      changedAchievementValue,
+      executeAction,
+      getAchievementDivClasses
+    };
   }
 }
 </script>
@@ -107,6 +150,20 @@ export default {
 
   &__profile-id, &__header {
     color: $color-yellow;
+  }
+
+  // SPLIT INTO SHARED DEF
+  &__achievement-cta {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 0;
+
+    & > button {
+      background-color: $color-red;
+      color: $color-white;
+      font-size: 1rem;
+      line-height: 1.125rem;
+    }
   }
 }
 

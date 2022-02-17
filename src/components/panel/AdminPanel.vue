@@ -24,7 +24,10 @@
           </div>
           <div class="admin-panel__wrapper col-md-12 px-5">
             <PanelAchievementList :profile-id="enteredProfileIdInput"
-                                  :achievement-list="achievements"></PanelAchievementList>
+                                  :achievementListBefore="achievementsBefore"
+                                  :achievement-list="achievements"
+                                  @changed-statuses="onChangedStatuses"
+            ></PanelAchievementList>
           </div>
         </div>
       </template>
@@ -53,6 +56,7 @@ export default {
     const profileIdInput = ref('');
     const enteredProfileIdInput = ref('');
     const achievements = ref([]);
+    const achievementsBefore = ref([]);
 
     onMounted(() => {
       const loggedAdminString = localStorage.getItem(LOCAL_STORAGE_KEY_LOGGED_ADMIN);
@@ -62,8 +66,13 @@ export default {
       }
     });
 
+    const onChangedStatuses = () => {
+      loadAchievements();
+    };
+
     const loadAchievements = () => {
       achievements.value = [];
+      achievementsBefore.value = [];
       enteredProfileIdInput.value = '';
       const profileId = profileIdInput.value.getInputValue();
       const filterData = {profile_id: profileId};
@@ -72,6 +81,7 @@ export default {
         enteredProfileIdInput.value = profileId;
         // console.log(`getFilteredAchievements(${filterData})`, results);
         if (!!results && !!results.achievements) {
+          achievementsBefore.value = results.achievements;
           achievements.value = results.achievements;
         }
       }).catch((err) => {
@@ -85,11 +95,13 @@ export default {
 
     return {
       achievements,
+      achievementsBefore,
       profileIdInput,
       enteredProfileIdInput,
       loggedAdmin,
       successfulLogin,
-      loadAchievements
+      loadAchievements,
+      onChangedStatuses
     };
   }
 }

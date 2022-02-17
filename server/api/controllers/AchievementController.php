@@ -38,42 +38,47 @@ class AchievementController extends ApiController
         return date("Y-m-d H:i:s");
     }
 
-    public function changeAchievementStatus()
+    public function changeAchievementsStatuses()
     {
-        if (!$this->bodyData->profile_id || !$this->bodyData->achievement_id || $this->bodyData->status === null) {
+        if (!$this->bodyData->profile_id || !$this->bodyData->achievements) {
             throw new Exception('Nie znaleziono osiągnięcia dla gracza');
         }
 
         $profileId = $this->bodyData->profile_id;
-        $achievementId = $this->bodyData->achievement_id;
-        $status = $this->bodyData->status;
+        $achievements = $this->bodyData->achievements;
 
-        $doneAchievement = AchievementDone::where('achievement_id', $achievementId)
-            ->where('player_id', $profileId)
-            ->first();
+        $doneAchievements = [];
+        foreach ($achievements as $achievement) {
+            $achievementId = $achievement->achievement_id;
+            $status = $achievement->done;
+            $doneAchievement = AchievementDone::where('achievement_id', $achievementId)
+                ->where('player_id', $profileId)
+                ->first();
 
-        if (!$status && !$doneAchievement) {
-            throw new Exception('Nie można oznaczyć niezakończonego osiągnięcia jako niezakończone');
-        }
-
-        if ($doneAchievement) {
-            if (!$status) {
-                $doneAchievement->accepted_at = null;
-            } else {
-                $doneAchievement->accepted_at = self::getCurrentTimestamp();
+            if (!$status && !$doneAchievement) {
+                throw new Exception('Nie można oznaczyć niezakończonego osiągnięcia jako niezakończone');
             }
-            $doneAchievement->save();
 
-        } else {
-            $newDoneAchievement = new AchievementDone();
-            $newDoneAchievement->achievement_id = $achievementId;
-            $newDoneAchievement->player_id = $profileId;
-            $newDoneAchievement->accepted_at = $status ? self::getCurrentTimestamp() : null;
-            $newDoneAchievement->save();
+            if ($doneAchievement) {
+                if (!$status) {
+                    $doneAchievement->accepted_at = null;
+                } else {
+                    $doneAchievement->accepted_at = self::getCurrentTimestamp();
+                }
+                $doneAchievement->save();
+                $doneAchievements[] = $doneAchievement;
+            } else {
+                $newDoneAchievement = new AchievementDone();
+                $newDoneAchievement->achievement_id = $achievementId;
+                $newDoneAchievement->player_id = $profileId;
+                $newDoneAchievement->accepted_at = $status ? self::getCurrentTimestamp() : null;
+                $newDoneAchievement->save();
+                $doneAchievements[] = $newDoneAchievement;
+            }
         }
 
         return JsonResponse::makeResponse([
-            'achievement' => $doneAchievement ?: $newDoneAchievement
+            'achievements' => $doneAchievements
         ]);
     }
 }

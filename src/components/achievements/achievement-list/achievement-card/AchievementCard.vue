@@ -29,6 +29,8 @@
   </div>
 </template>
 <script>
+import {translateAchievementType} from "@/assets/js/helpers/achievement";
+
 export default {
   name: 'AchievementCard',
   props: {
@@ -58,17 +60,7 @@ export default {
   },
   setup(props) {
     const getTitle = () => {
-      let translatedTitle = '';
-
-      switch (props.title) {
-        case 'STARTING': translatedTitle = 'Startowe'; break;
-        case 'MAIN': translatedTitle = 'Główne'; break;
-        case 'NORMAL': translatedTitle = 'Normalne'; break;
-        case 'HARD': translatedTitle = 'Trudne'; break;
-        case 'LABORIOUS': translatedTitle = 'Wymagające'; break;
-      }
-
-      return translatedTitle;
+      return translateAchievementType(props.title);
     };
 
     return { getTitle }
