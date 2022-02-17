@@ -2,8 +2,9 @@
 
 
 class JsonResponse {
+
     public static function makeResponse(array $responseObject) {
-        header('Content-Type: application/json; charset=utf-8');
+        Cors::loadCorsHeaders();
 
         return json_encode($responseObject, JSON_UNESCAPED_UNICODE);
     }
