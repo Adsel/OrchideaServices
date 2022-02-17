@@ -1,6 +1,6 @@
 <template>
   <HeaderMobile></HeaderMobile>
-  <HeaderDesktop :admin-side="adminSide"></HeaderDesktop>
+  <HeaderDesktop :admin-side="adminSide" ref="headerRef"></HeaderDesktop>
   <div class="content pb-4">
     <div class="container">
       <slot></slot>
@@ -13,6 +13,7 @@
 import HeaderMobile from "../header/header-mobile/HeaderMobile";
 import HeaderDesktop from "../header/header-desktop/HeaderDesktop";
 import Footer from "../footer/footer-mobile/FooterMobile";
+import {ref} from "vue";
 
 export default {
   name: 'Subpage',
@@ -27,6 +28,15 @@ export default {
       required: false,
       default: false
     }
+  },
+  setup() {
+    const headerRef = ref(null);
+
+    const updateAdminInfo = () => {
+      headerRef.value.updateAdminInfo();
+    };
+
+    return {headerRef, updateAdminInfo};
   }
 }
 </script>

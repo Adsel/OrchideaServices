@@ -1,17 +1,11 @@
 <template>
-  <Subpage :admin-side="true">
+  <Subpage :admin-side="true" ref="subpage">
     <div class="row p-3">
       <div v-if="!loggedAdmin" class="admin-panel__login-wrapper p-3">
         <AdminPanelAuth @loggedAdmin="successfulLogin"></AdminPanelAuth>
       </div>
       <template v-else>
         <div class="admin-panel__wrapper col-md-12 px-5">
-          <div class="px-5 pb-1 pt-3">
-          <span class="admin-panel__welcome">
-            Zalogowany jako
-            <span class="admin-panel__welcome-name">{{ loggedAdmin.visible_name }}</span>.
-          </span>
-          </div>
           <div class="admin-panel__management">
             <AchievementSingleFilter title="ID profilu gracza" description="Wprowadź identyfikator profilu gracza"
                                      placeholder="ID profilu" ref="profileIdInput"></AchievementSingleFilter>
@@ -35,14 +29,14 @@
   </Subpage>
 </template>
 <script>
-import {ref, onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import Subpage from "../layout/subpage/Subpage";
 import AdminPanelAuth from "@/components/panel/panel-auth/AdminPanelAuth";
 import AchievementSingleFilter
   from "../achievements/achievement-filter/achievement-single-filter/AchievementSingleFilter";
 import PanelAchievementList from "./panel-achievement-list/PanelAchievementList";
 import {getFilteredAchievements} from "@/assets/js/api/achievement";
-import {LOCAL_STORAGE_KEY_LOGGED_ADMIN} from "@/assets/js/variables/auth";
+import {getLoggedAdmin} from "@/assets/js/helpers/admin";
 
 export default {
   components: {
@@ -52,18 +46,15 @@ export default {
     Subpage
   },
   setup() {
-    const loggedAdmin = ref(null);
     const profileIdInput = ref('');
     const enteredProfileIdInput = ref('');
     const achievements = ref([]);
     const achievementsBefore = ref([]);
+    const subpage = ref(null);
+    const loggedAdmin = ref(null);
 
     onMounted(() => {
-      const loggedAdminString = localStorage.getItem(LOCAL_STORAGE_KEY_LOGGED_ADMIN);
-      if (loggedAdminString) {
-        const loggedAdminObject = JSON.parse(loggedAdminString);
-        loggedAdmin.value = loggedAdminObject;
-      }
+      loggedAdmin.value = getLoggedAdmin();
     });
 
     const onChangedStatuses = () => {
@@ -89,8 +80,9 @@ export default {
       });
     };
 
-    const successfulLogin = (admin) => {
-      loggedAdmin.value = admin;
+    const successfulLogin = () => {
+      loggedAdmin.value = getLoggedAdmin();
+      subpage.value.updateAdminInfo();
     };
 
     return {
@@ -99,9 +91,10 @@ export default {
       profileIdInput,
       enteredProfileIdInput,
       loggedAdmin,
-      successfulLogin,
       loadAchievements,
-      onChangedStatuses
+      onChangedStatuses,
+      successfulLogin,
+      subpage
     };
   }
 }
@@ -140,16 +133,6 @@ export default {
   &__management {
     width: 40%;
     margin: auto;
-  }
-
-  &__welcome {
-    color: $color-ash;
-    font-size: 1.125rem;
-  }
-
-  &__welcome-name {
-    color: $color-yellow;
-    font-weight: bold;
   }
 
   &__achievement-cta {
