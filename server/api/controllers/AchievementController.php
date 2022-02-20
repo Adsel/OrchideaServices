@@ -20,9 +20,11 @@ class AchievementController extends ApiController
 
         if (isset($this->bodyData->difficulty)) {
             $difficultyArray = $this->bodyData->difficulty;
-            $allAchievements = $allAchievements->whereHas('achievementType', function ($q) use ($difficultyArray) {
-                $q->whereIn('name', $difficultyArray);
-            });
+            if (count($difficultyArray) > 0) {
+                $allAchievements = $allAchievements->whereHas('achievementType', function ($q) use ($difficultyArray) {
+                    $q->whereIn('name', $difficultyArray);
+                });
+            }
         }
 
         $allAchievements = $allAchievements->get();
