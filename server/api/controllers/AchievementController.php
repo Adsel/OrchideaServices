@@ -13,12 +13,12 @@ class AchievementController extends ApiController
     {
         $allAchievements = Achievement::with('achievementType');
 
-        if (!!$this->bodyData->description) {
+        if (isset($this->bodyData->description)) {
             $descPhrase = $this->bodyData->description;
             $allAchievements = $allAchievements->where('description', 'like', '%' . $descPhrase . '%');
         }
 
-        if (!!$this->bodyData->difficulty) {
+        if (isset($this->bodyData->difficulty)) {
             $difficultyArray = $this->bodyData->difficulty;
             $allAchievements = $allAchievements->whereHas('achievementType', function ($q) use ($difficultyArray) {
                 $q->whereIn('name', $difficultyArray);
