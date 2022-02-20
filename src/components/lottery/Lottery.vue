@@ -78,7 +78,7 @@ export default {
           loadNicknames(results.result.date);
         }
       }).catch((err) => {
-        console.log(err);
+        console.error(err);
       });
     };
 

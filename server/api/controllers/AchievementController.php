@@ -18,6 +18,13 @@ class AchievementController extends ApiController
             $allAchievements = $allAchievements->where('description', 'like', '%' . $descPhrase . '%');
         }
 
+        if (!!$this->bodyData->difficulty) {
+            $difficultyArray = $this->bodyData->difficulty;
+            $allAchievements = $allAchievements->whereHas('achievementType', function ($q) use ($difficultyArray) {
+                $q->whereIn('name', $difficultyArray);
+            });
+        }
+
         $allAchievements = $allAchievements->get();
 
         $mappedAchievements = [];

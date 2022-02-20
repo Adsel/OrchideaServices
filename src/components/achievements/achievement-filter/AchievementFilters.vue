@@ -7,7 +7,7 @@
       <AchievementSingleFilter title="Treść zadania"
                                description="Pozostaw puste, aby wyświetlić wszystkie"
                                placeholder="Treść" ref="achievementContent"></AchievementSingleFilter>
-      <AchievementDifficultyFilter></AchievementDifficultyFilter>
+      <AchievementDifficultyFilter ref="difficultyFilter"></AchievementDifficultyFilter>
       <AchievementPlayerToggle @filter-by-players="filterByPlayer($event)"
                                label="Szukaj po graczu"></AchievementPlayerToggle>
       <template v-if="isFilteredByPlayer">
@@ -46,6 +46,7 @@ export default {
   setup(props, context) {
     const isFilteredByPlayer = ref(false);
     const achievementContent = ref('');
+    const difficultyFilter = ref(null);
     const nicknameFilter = ref('');
 
     const filterByPlayer = (value) => {
@@ -55,11 +56,12 @@ export default {
     const filter = () => {
       context.emit('filter', {
         description: achievementContent.value.getInputValue(),
-        profile_id: isFilteredByPlayer.value ? nicknameFilter.value.getInputValue() : null
+        profile_id: isFilteredByPlayer.value ? nicknameFilter.value.getInputValue() : null,
+        difficulty: difficultyFilter.value.getDifficulty()
       });
     };
 
-    return {isFilteredByPlayer, achievementContent, nicknameFilter, filterByPlayer, filter}
+    return {isFilteredByPlayer, achievementContent, difficultyFilter, nicknameFilter, filterByPlayer, filter};
   }
 }
 </script>

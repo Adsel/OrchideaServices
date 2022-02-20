@@ -8,7 +8,7 @@ const getRequest = (url) => {
                 resolve(results);
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error);
                 reject(error);
             });
     });
@@ -32,7 +32,7 @@ const postRequest = (url, postData) => {
                 resolve(results);
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error);
                 reject(error);
             });
     });

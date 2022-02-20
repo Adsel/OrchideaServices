@@ -17,6 +17,7 @@
 <script>
 import FormToggleSwitch from "../../../layout/form/toggle-switch/FormToggleSwitch";
 import {ref} from "vue";
+import {translateAchievementType} from "@/assets/js/helpers/achievement";
 
 export default {
   emits: [
@@ -55,30 +56,9 @@ export default {
       }
     };
 
-    // TODO:
-    // split definition into helper or pure function
+
     const getTitle = (title) => {
-      let translatedTitle = '';
-
-      switch (title) {
-        case 'STARTING':
-          translatedTitle = 'Startowe';
-          break;
-        case 'MAIN':
-          translatedTitle = 'Główne';
-          break;
-        case 'NORMAL':
-          translatedTitle = 'Normalne';
-          break;
-        case 'HARD':
-          translatedTitle = 'Trudne';
-          break;
-        case 'LABORIOUS':
-          translatedTitle = 'Wymagające';
-          break;
-      }
-
-      return translatedTitle;
+      return translateAchievementType(title);
     };
 
     return {

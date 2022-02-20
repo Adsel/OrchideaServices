@@ -25,22 +25,21 @@ export default {
           achievementList.value = results.achievements;
         }
       }).catch((err) => {
-        console.log(err);
+        console.error(err);
       });
     });
 
     const filterAchievements = (filter) => {
       const filterData = filter;
-      console.log('filterAchievements', filterData);
 
       getFilteredAchievements(filterData).then((results) => {
-        console.log(`getFilteredAchievements(${filterData})`, results);
+        // console.log(`getFilteredAchievements(${filterData})`, results);
         if (!!results && !!results.achievements) {
           achievementList.value = results.achievements;
         }
         isFilterByPlayer.value = !!filterData && (!!filterData.profile_id || !!filterData.nickname);
       }).catch((err) => {
-        console.log(`getFilteredAchievements(${filterData}) err`, err);
+        console.error(`getFilteredAchievements(${filterData}) err`, err);
       });
     };
 
