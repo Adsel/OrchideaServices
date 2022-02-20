@@ -14,5 +14,10 @@ const logoutAdmin = () => {
     location.reload();
 };
 
+const getLoggedAdminId = () => {
+    const loggedAdmin = getLoggedAdmin();
 
-export {getLoggedAdmin, logoutAdmin};
+    return loggedAdmin ? loggedAdmin.administrator_id : null;
+};
+
+export {getLoggedAdmin, getLoggedAdminId, logoutAdmin};

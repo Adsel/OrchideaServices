@@ -55,6 +55,8 @@ class AuthController extends ApiController
             $tokenDB->save();
         }
 
+        AdminLog::logAction($adminId, AdminLog::ADMIN_LOG_STATUS_ADMIN_LOGIN, (object)[]);
+
         return JsonResponse::makeResponse([
             'status' => true,
             'admin' => (object)[

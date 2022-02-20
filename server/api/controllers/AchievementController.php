@@ -54,12 +54,13 @@ class AchievementController extends ApiController
 
     public function changeAchievementsStatuses()
     {
-        if (!$this->bodyData->profile_id || !$this->bodyData->achievements) {
+        if (!isset($this->bodyData->profile_id) || !isset($this->bodyData->achievements) || !isset($this->bodyData->admin_id)) {
             throw new Exception('Nie znaleziono osiągnięcia dla gracza');
         }
 
         $profileId = $this->bodyData->profile_id;
         $achievements = $this->bodyData->achievements;
+        $adminId = $this->bodyData->admin_id;
 
         $doneAchievements = [];
         foreach ($achievements as $achievement) {
@@ -90,6 +91,10 @@ class AchievementController extends ApiController
                 $doneAchievements[] = $newDoneAchievement;
             }
         }
+
+        AdminLog::logAction($adminId, AdminLog::ADMIN_LOG_STATUS_CHANGE_ACHIEVEMENTS_STATUS, (object)[
+            'changedAchievements' => $doneAchievements,
+        ]);
 
         return JsonResponse::makeResponse([
             'achievements' => $doneAchievements
