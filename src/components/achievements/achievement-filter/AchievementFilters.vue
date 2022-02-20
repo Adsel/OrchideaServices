@@ -5,7 +5,7 @@
     </div>
     <div class="filters">
       <AchievementSingleFilter title="Treść zadania"
-                               description="Pozostaw puste, aby wyświetlić wszystkie (dostępne wkrótce)"
+                               description="Pozostaw puste, aby wyświetlić wszystkie"
                                placeholder="Treść" ref="achievementContent"></AchievementSingleFilter>
       <AchievementDifficultyFilter></AchievementDifficultyFilter>
       <AchievementPlayerToggle @filter-by-players="filterByPlayer($event)"

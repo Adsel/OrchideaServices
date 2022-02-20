@@ -11,7 +11,14 @@ class AchievementController extends ApiController
 
     public function getFilteredAchievements()
     {
-        $allAchievements = Achievement::with('achievementType')->get();
+        $allAchievements = Achievement::with('achievementType');
+
+        if (!!$this->bodyData->description) {
+            $descPhrase = $this->bodyData->description;
+            $allAchievements = $allAchievements->where('description', 'like', '%' . $descPhrase . '%');
+        }
+
+        $allAchievements = $allAchievements->get();
 
         $mappedAchievements = [];
         foreach ($allAchievements as $achievement) {
