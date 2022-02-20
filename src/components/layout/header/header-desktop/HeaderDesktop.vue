@@ -13,8 +13,11 @@
 
     <div class="admin-panel__welcome-wrapper" v-if="loggedAdmin">
           <span class="admin-panel__welcome">
-            Zalogowany jako
+            Zalogowany jako &nbsp;
             <span class="admin-panel__welcome-name">{{ loggedAdmin.visible_name }}</span>
+            <button class="btn admin-panel__btn-cta btn-small" @click="logoutAdmin">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
           </span>
     </div>
   </header>
@@ -23,7 +26,7 @@
 <script>
 import HeaderLink from "./HeaderDesktopLink";
 import {onMounted, ref} from "vue";
-import {getLoggedAdmin} from "@/assets/js/helpers/admin";
+import {getLoggedAdmin, logoutAdmin} from "@/assets/js/helpers/admin";
 
 export default {
   components: {
@@ -47,7 +50,7 @@ export default {
       loggedAdmin.value = getLoggedAdmin();
     };
 
-    return {loggedAdmin, updateAdminInfo};
+    return {loggedAdmin, logoutAdmin, updateAdminInfo};
   }
 }
 </script>
@@ -65,6 +68,9 @@ export default {
   &__welcome {
     color: $color-ash;
     font-size: 1.125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__welcome-name {
@@ -74,6 +80,10 @@ export default {
 
   &__welcome-wrapper {
     margin-left: auto;
+  }
+
+  &__btn-cta {
+    color: $color-red;
   }
 }
 </style>
