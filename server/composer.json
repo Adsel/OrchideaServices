@@ -9,9 +9,8 @@
   },
   "autoload": {
     "classmap": [
-      "server",
-      "server/api",
-      "server/database"
+      "api",
+      "database"
     ]
   }
 }
