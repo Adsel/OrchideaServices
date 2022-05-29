@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Docker installation 
+PHP 7.4 docker version with required dependencies:
+[readme-docker-installation.md](./docker/readme-docker-installation.md);

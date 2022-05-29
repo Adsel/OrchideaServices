@@ -3,17 +3,17 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require "../../vendor/autoload.php";
-require "../lib/env-load.php";
-require "../lib/orm-config.php";
+require "./vendor/autoload.php";
+require "./lib/env-load.php";
+require "./lib/orm-config.php";
 
 $BASE_PATH = $_ENV['API_PATH'];
 
 $router = new AltoRouter();
 $router->setBasePath($BASE_PATH);
 
-require_once "./routes/user-routes.php";
-require_once "./routes/admin-routes.php";
+require_once "./api/routes/user-routes.php";
+require_once "./api/routes/admin-routes.php";
 
 // === MATCHING PATHS ===
 $match = $router->match();

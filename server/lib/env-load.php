@@ -9,6 +9,6 @@ $REQUIRED_ENVS = [
     'NICKNAMES_FILE_PATH'
 ];
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 $dotenv->required($REQUIRED_ENVS);
