@@ -27,6 +27,7 @@ import PanelAchievementStatus from "./panel-achievement-status/PanelAchievementS
 import AchievementStateConfirmation from "./AchievementStateConfirmation";
 import {watch, ref} from "vue";
 import {changeAchievementsStates} from "@/assets/js/api/achievement";
+import {getLoggedAdminId} from "@/assets/js/helpers/admin";
 
 export default {
   emits: [
@@ -93,6 +94,7 @@ export default {
       const achievementData = {
         profile_id: props.profileId,
         achievements: event.achievements,
+        admin_id: getLoggedAdminId()
       };
       changeAchievementsStates(achievementData).then(() => {
         // console.log(`changeAchievementsStates(${achievementData})`, results);

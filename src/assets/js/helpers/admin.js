@@ -9,5 +9,15 @@ const getLoggedAdmin = () => {
     return null;
 };
 
+const logoutAdmin = () => {
+    localStorage.removeItem(LOCAL_STORAGE_KEY_LOGGED_ADMIN);
+    location.reload();
+};
 
-export {getLoggedAdmin};
+const getLoggedAdminId = () => {
+    const loggedAdmin = getLoggedAdmin();
+
+    return loggedAdmin ? loggedAdmin.administrator_id : null;
+};
+
+export {getLoggedAdmin, getLoggedAdminId, logoutAdmin};
