@@ -1,6 +1,7 @@
 <?php
 
 // === LOTTERY ===
+/** @var AltoRouter $router */
 $router->map('GET', '/index.php/lottery/timer', function () {
     echo (new LotteryController())->getTimer();
 });
