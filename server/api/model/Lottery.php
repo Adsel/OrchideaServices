@@ -6,6 +6,7 @@ use model\lottery\reward\CurrencyRewardCreator;
 use model\lottery\reward\GoldRewardCreator;
 use model\lottery\reward\TicketRewardCreator;
 use model\lottery\rewards_pool\RewardsPool;
+use Singleton;
 
 /**
  * MarcinRadwan OrchideaServices
@@ -18,24 +19,10 @@ use model\lottery\rewards_pool\RewardsPool;
 class Lottery
 {
     const REWARD_NAME_EMPTY = 'pusto';
-    const TICKETS_COUNT = 100;
 
     const CONFIGURATION_PREFIX_TICKET = 'ticket';
     const CONFIGURATION_PREFIX_GOLD = 'gold';
     const CONFIGURATION_PREFIX_CURRENCY = 'currency';
-
-    const CONFIGURATION = [
-        self::CONFIGURATION_PREFIX_TICKET . '_1' => 2,
-        self::CONFIGURATION_PREFIX_TICKET . '_2' => 5,
-        self::CONFIGURATION_PREFIX_GOLD . '_200' => 1,
-        self::CONFIGURATION_PREFIX_GOLD . '_125' => 2,
-        self::CONFIGURATION_PREFIX_GOLD . '_75' => 4,
-        self::CONFIGURATION_PREFIX_GOLD . '_25' => 6,
-        self::CONFIGURATION_PREFIX_CURRENCY . '_80' => 2,
-        self::CONFIGURATION_PREFIX_CURRENCY . '_40' => 4,
-        self::CONFIGURATION_PREFIX_CURRENCY . '_20' => 6,
-        self::CONFIGURATION_PREFIX_CURRENCY . '_10' => 8,
-    ];
 
     public static ?RewardsPool $rewardsInPool = null;
 
@@ -78,7 +65,7 @@ class Lottery
     {
         $tempArray = [];
 
-        foreach (self::CONFIGURATION as $rewardKey => $count) {
+        foreach (Singleton::getConfiguration()->getRewards() as $rewardKey => $count) {
             $rewardData = explode('_', $rewardKey);
             for ($i = 0; $i < $count; $i++) {
                 $tempArray[] = self::createRewardInstance($rewardData[0], $rewardData[1]);

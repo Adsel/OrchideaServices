@@ -134,7 +134,8 @@ class LotteryController
         $rewardsInPool = (clone Lottery::$rewardsInPool)->getRewardsFromPool();
         $rewards = [];
 
-        for ($i = 1; $i <= Lottery::TICKETS_COUNT; $i++) {
+        $ticketsCount = Singleton::getConfiguration()->getTicketCount();
+        for ($i = 1; $i <= $ticketsCount; $i++) {
             $rewards[$i] = Lottery::REWARD_NAME_EMPTY;
         }
 
@@ -142,14 +143,14 @@ class LotteryController
 
         for ($o = 0; $o < $N; $o++) {
             do {
-                $randedIndex = rand(1, Lottery::TICKETS_COUNT);
+                $randedIndex = rand(1, $ticketsCount);
             } while ($rewards[$randedIndex] !== Lottery::REWARD_NAME_EMPTY);
 
             $rewards[$randedIndex] = $rewardsInPool[$o];
         }
 
         $json = "{";
-        for ($z = 1; $z <= Lottery::TICKETS_COUNT; $z++) {
+        for ($z = 1; $z <= $ticketsCount; $z++) {
             $json .= '"' . $z . '":"' . $rewards[$z] . '", ';
         }
 
