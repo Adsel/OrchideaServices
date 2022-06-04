@@ -1,5 +1,7 @@
 <?php
 
+namespace model\lottery\reward;
+
 /**
  * MarcinRadwan OrchideaServices
  *
@@ -8,9 +10,12 @@
  *
  * @package   MarcinRadwan_OrchideaServices
  */
-require "../server/vendor/autoload.php";
-require "../server/lib/env-load.php";
-require "../server/lib/orm-config.php";
-
-echo (new LotteryController())->randLottery();
-
+interface Reward
+{
+    /**
+     * Return reward representation string
+     *
+     * @return string
+     */
+    public function getRewardDescription(): string;
+}

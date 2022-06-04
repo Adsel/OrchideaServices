@@ -1,5 +1,8 @@
 <?php
 
+namespace model;
+use AdministratorLog;
+
 class AdminLog
 {
     const ADMIN_LOG_STATUS_ADMIN_LOGIN = 'ADMIN_LOGIN';

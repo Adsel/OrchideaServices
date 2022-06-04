@@ -1,8 +1,15 @@
 <?php
 
-
+/**
+ * MarcinRadwan OrchideaServices
+ *
+ * @copyright Copyright (c) 2022 Marcin Radwan. All rights reserved.
+ * @author    marcin.radwan
+ *
+ * @package   MarcinRadwan_OrchideaServices
+ */
 class CalendarLocales {
-    public function getCurrentMonthName() {
+    public static function getCurrentMonthName(): string {
         $monthS = '';
         $mon = (string) date("m");
         switch ($mon) {

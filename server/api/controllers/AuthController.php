@@ -1,5 +1,16 @@
 <?php
 
+use model\AdminLog;
+use model\AuthModel;
+
+/**
+ * MarcinRadwan OrchideaServices
+ *
+ * @copyright Copyright (c) 2022 Marcin Radwan. All rights reserved.
+ * @author    marcin.radwan
+ *
+ * @package   MarcinRadwan_OrchideaServices
+ */
 class AuthController extends ApiController
 {
     const EXCEPTION_MESSAGE_MISSING_DATA = 'Proszę wypełnić wszystkie pola!';

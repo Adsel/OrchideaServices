@@ -1,5 +1,15 @@
 <?php
 
+namespace model;
+
+/**
+ * MarcinRadwan OrchideaServices
+ *
+ * @copyright Copyright (c) 2022 Marcin Radwan. All rights reserved.
+ * @author    marcin.radwan
+ *
+ * @package   MarcinRadwan_OrchideaServices
+ */
 class AuthModel
 {
     const AUTH_TOKEN_LENGTH = 30;
@@ -26,7 +36,7 @@ class AuthModel
     {
         $now = date(self::AUTH_TOKEN_EXPIRATION_FORMAT);
 
-        $expirationString = $now . ' + ' . self:: AUTH_TOKEN_EXPIRATION_DAYS. ' days';
+        $expirationString = $now . ' + ' . self:: AUTH_TOKEN_EXPIRATION_DAYS . ' days';
         return date(self::AUTH_TOKEN_EXPIRATION_FORMAT, strtotime($expirationString));
     }
 

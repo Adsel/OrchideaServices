@@ -1,23 +1,20 @@
 <?php
 
+use model\Lottery;
+use Carbon\Carbon;
 
+/**
+ * MarcinRadwan OrchideaServices
+ *
+ * @copyright Copyright (c) 2022 Marcin Radwan. All rights reserved.
+ * @author    marcin.radwan
+ *
+ * @package   MarcinRadwan_OrchideaServices
+ */
 class LotteryController {
     private $MONTHS = [
         'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec',
         'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
-    ];
-    private $TICKETS_COUNT = 100;
-    private $REWARDS = [
-        "strzal x2", "strzal x2",
-        "strzal", "strzal", "strzal", "strzal", "strzal",
-        "200m",
-        "125m", "125m",
-        "75m", "75m", "75m", "75m",
-        "25m", "25m", "25m", "25m", "25m", "25m",
-        "80 kw.", "80 kw.",
-        "40 kw.", "40 kw.", "40 kw.", "40 kw.",
-        "20 kw.", "20 kw.", "20 kw.", "20 kw.", "20 kw.", "20 kw.",
-        "10 kw.", "10 kw.", "10 kw.", "10 kw.", "10 kw.", "10 kw.", "10 kw.", "10 kw."
     ];
 
     public function getTimer() {
@@ -123,33 +120,35 @@ class LotteryController {
     public function randLottery() {
         header('Content-Type: application/json; charset=utf-8');
 
-
+        Lottery::prepareRewardPool();
+        $rewardsInPool = Lottery::$rewardsInPool;
         $rewards = [];
-        for ($i = 1; $i <= $this->TICKETS_COUNT; $i++)
-            $rewards[$i] = "pusto";
 
-        $N = count($this->REWARDS);
-        $randedIndex = 0;
+        for ($i = 1; $i <= Lottery::TICKETS_COUNT; $i++) {
+            $rewards[$i] = Lottery::REWARD_NAME_EMPTY;
+        }
+
+        $N = count($rewardsInPool);
 
         for ($o = 0; $o < $N; $o++) {
             do {
-                $randedIndex = rand(1, $this->TICKETS_COUNT);
-            } while ($rewards[$randedIndex] != "pusto");
+                $randedIndex = rand(1, Lottery::TICKETS_COUNT);
+            } while ($rewards[$randedIndex] !== Lottery::REWARD_NAME_EMPTY);
 
-            $rewards[$randedIndex] = $this->REWARDS[$o];
+            $rewards[$randedIndex] = $rewardsInPool[$o];
         }
 
         $json = "{";
-        for ($z = 1; $z <= $this->TICKETS_COUNT; $z++) {
+        for ($z = 1; $z <= Lottery::TICKETS_COUNT; $z++) {
             $json .= '"' . $z . '":"' . $rewards[$z] . '", ';
         }
 
-        $this->TICKETS_COUNT;
-
         $json .= '"month":"' . CalendarLocales::getCurrentMonthName() . '","year":"' . date("Y") . '"}';
         $result = new LotteryResult();
-        $result->datetime = Carbon\Carbon::now();
+        $result->datetime = Carbon::now();
         $result->rewards = $json;
-        $result->save();
+        echo $json;
+        //exit();
+        //$result->save();
     }
 }
