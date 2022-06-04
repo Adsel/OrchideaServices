@@ -4,8 +4,8 @@ namespace model;
 
 use model\lottery\reward\CurrencyRewardCreator;
 use model\lottery\reward\GoldRewardCreator;
-use model\lottery\reward\Reward;
 use model\lottery\reward\TicketRewardCreator;
+use model\lottery\rewards_pool\RewardsPool;
 
 /**
  * MarcinRadwan OrchideaServices
@@ -37,7 +37,7 @@ class Lottery
         self::CONFIGURATION_PREFIX_CURRENCY . '_10' => 8,
     ];
 
-    public static array $rewardsInPool = [];
+    public static ?RewardsPool $rewardsInPool = null;
 
     /**
      * Init all rewards
@@ -85,6 +85,6 @@ class Lottery
             }
         }
 
-        self::$rewardsInPool = $tempArray;
+        self::$rewardsInPool = new RewardsPool($tempArray);
     }
 }

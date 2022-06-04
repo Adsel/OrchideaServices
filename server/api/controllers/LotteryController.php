@@ -11,13 +11,15 @@ use Carbon\Carbon;
  *
  * @package   MarcinRadwan_OrchideaServices
  */
-class LotteryController {
+class LotteryController
+{
     private $MONTHS = [
         'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec',
         'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
     ];
 
-    public function getTimer() {
+    public function getTimer()
+    {
         $LOTTERY = [
             'day' => 25,
             'hour' => 21,
@@ -59,7 +61,8 @@ class LotteryController {
         ]);
     }
 
-    public function getLastResult() {
+    public function getLastResult()
+    {
         $result = LotteryResult::orderBy('result_id', 'desc')
             ->first();
 
@@ -73,7 +76,8 @@ class LotteryController {
         ]]);
     }
 
-    public function getNicknames() {
+    public function getNicknames()
+    {
         $nicknames = [];
         $month = '';
         $year = '';
@@ -85,7 +89,7 @@ class LotteryController {
             RecursiveIteratorIterator::SELF_FIRST);
 
         foreach ($jsonIterator as $key => $val) {
-            if(!is_array($val)) {
+            if (!is_array($val)) {
                 if ($key == 'month') {
                     $month = $val;
                 } else if ($key == 'year') {
@@ -105,7 +109,7 @@ class LotteryController {
         $lastLoterryMonth = date("m", strtotime($result->datetime));
         $loterryMonth = intval(strtolower($lastLoterryMonth)) - 1;
 
-        $resultData =  [
+        $resultData = [
             'month' => $month,
             'year' => $year
         ];
@@ -117,11 +121,17 @@ class LotteryController {
         return JsonResponse::makeResponse($resultData);
     }
 
-    public function randLottery() {
+    /**
+     * Rand lottery rewards and publish it
+     *
+     * @return void
+     */
+    public function randLottery()
+    {
         header('Content-Type: application/json; charset=utf-8');
 
         Lottery::prepareRewardPool();
-        $rewardsInPool = Lottery::$rewardsInPool;
+        $rewardsInPool = (clone Lottery::$rewardsInPool)->getRewardsFromPool();
         $rewards = [];
 
         for ($i = 1; $i <= Lottery::TICKETS_COUNT; $i++) {
@@ -147,6 +157,7 @@ class LotteryController {
         $result = new LotteryResult();
         $result->datetime = Carbon::now();
         $result->rewards = $json;
+        // TODO:
         echo $json;
         //exit();
         //$result->save();
