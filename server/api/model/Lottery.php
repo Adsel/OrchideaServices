@@ -61,6 +61,7 @@ class Lottery
     public static function generateRewards(): RewardsResults
     {
         Lottery::prepareRewardPool();
+        // Lottery::$rewardsInPool->setSortingStrategy(new \SortByNameAscStrategy());
         $rewardsInPool = (clone Lottery::$rewardsInPool)->getRewardsFromPool();
         $rewards = [];
 

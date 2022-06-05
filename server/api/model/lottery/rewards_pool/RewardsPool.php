@@ -16,6 +16,7 @@ class RewardsPool
 {
     private array $rewardsInPool;
     private string $generated_at;
+    private ?RewardsSortingStrategy $sortingStrategy;
 
     /**
      * RewardsPool constructor.
@@ -57,7 +58,13 @@ class RewardsPool
      */
     public function getRewardsFromPool(): array
     {
-        return $this->rewardsInPool;
+        $rewards = $this->rewardsInPool;
+
+        if (isset($this->sortingStrategy)) {
+            return $this->sortingStrategy->sort($rewards);
+        }
+
+        return $rewards;
     }
 
     /**
@@ -68,5 +75,16 @@ class RewardsPool
     public function getGeneratedAt(): string
     {
         return $this->generated_at;
+    }
+
+    /**
+     * Set specific sorting strategy
+     *
+     * @param RewardsSortingStrategy $strategy
+     * @return void
+     */
+    public function setSortingStrategy(RewardsSortingStrategy $strategy): void
+    {
+        $this->sortingStrategy = $strategy;
     }
 }
