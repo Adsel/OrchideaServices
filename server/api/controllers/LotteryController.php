@@ -2,6 +2,7 @@
 
 use model\Lottery;
 use Carbon\Carbon;
+use model\lottery\notification\EmailNotificationObserver;
 use model\lottery\rewards_pool\JsonOutput;
 use model\lottery\rewards_pool\TextFormat;
 
@@ -133,6 +134,8 @@ class LotteryController
         header('Content-Type: application/json; charset=utf-8');
 
         $results = Lottery::generateRewards();
+        $observer = new EmailNotificationObserver();
+        $results->attach($observer);
 
         $textFormatter = new TextFormat();
         $jsonOutput = new JsonOutput($textFormatter);
@@ -140,8 +143,10 @@ class LotteryController
         $result = new LotteryResult();
         $result->datetime = Carbon::now();
         $result->rewards = $jsonOutput->formatText(clone $results);
-        //$result->save();
+        // $result->save();
 
         Lottery::printLotteryOutput($results);
+        $results->sendResultsNotification();
+        $results->detach($observer);
     }
 }
