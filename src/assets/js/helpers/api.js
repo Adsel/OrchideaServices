@@ -1,4 +1,5 @@
-const API_URL = 'https://adsel.pl/server';
+// const API_URL = 'https://adsel.pl/server/api'; // PROD
+const API_URL = 'http://localhost:8085'; // DEV
 
 const getRequest = (url) => {
     return new Promise((resolve, reject) => {
