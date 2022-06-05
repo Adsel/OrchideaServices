@@ -5,7 +5,10 @@ namespace model;
 use model\lottery\reward\CurrencyRewardCreator;
 use model\lottery\reward\GoldRewardCreator;
 use model\lottery\reward\TicketRewardCreator;
+use model\lottery\rewards_pool\PrettyOutput;
 use model\lottery\rewards_pool\RewardsPool;
+use model\lottery\rewards_pool\RewardsResults;
+use model\lottery\rewards_pool\TextFormat;
 use Singleton;
 
 /**
@@ -34,6 +37,49 @@ class Lottery
     public static function prepareRewardPool(): void
     {
         self::createRewards();
+    }
+
+    /**
+     * Print lottery results on console
+     *
+     * @param RewardsResults $results
+     * @return void
+     */
+    public static function printLotteryOutput(RewardsResults $results): void
+    {
+        $textFormatter = new TextFormat();
+        $output = new PrettyOutput($textFormatter);
+
+        echo "\n" . $output->formatText(clone $results);
+    }
+
+    /**
+     * Generate lottery results
+     *
+     * @return RewardsResults
+     */
+    public static function generateRewards(): RewardsResults
+    {
+        Lottery::prepareRewardPool();
+        $rewardsInPool = (clone Lottery::$rewardsInPool)->getRewardsFromPool();
+        $rewards = [];
+
+        $ticketsCount = Singleton::getConfiguration()->getTicketCount();
+        for ($i = 1; $i <= $ticketsCount; $i++) {
+            $rewards[$i] = Lottery::REWARD_NAME_EMPTY;
+        }
+
+        $N = count($rewardsInPool);
+
+        for ($o = 0; $o < $N; $o++) {
+            do {
+                $randedIndex = rand(1, $ticketsCount);
+            } while ($rewards[$randedIndex] !== Lottery::REWARD_NAME_EMPTY);
+
+            $rewards[$randedIndex] = $rewardsInPool[$o];
+        }
+
+        return new RewardsResults($rewards);
     }
 
     /**

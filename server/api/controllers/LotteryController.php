@@ -2,6 +2,8 @@
 
 use model\Lottery;
 use Carbon\Carbon;
+use model\lottery\rewards_pool\JsonOutput;
+use model\lottery\rewards_pool\TextFormat;
 
 /**
  * MarcinRadwan OrchideaServices
@@ -130,37 +132,16 @@ class LotteryController
     {
         header('Content-Type: application/json; charset=utf-8');
 
-        Lottery::prepareRewardPool();
-        $rewardsInPool = (clone Lottery::$rewardsInPool)->getRewardsFromPool();
-        $rewards = [];
+        $results = Lottery::generateRewards();
 
-        $ticketsCount = Singleton::getConfiguration()->getTicketCount();
-        for ($i = 1; $i <= $ticketsCount; $i++) {
-            $rewards[$i] = Lottery::REWARD_NAME_EMPTY;
-        }
+        $textFormatter = new TextFormat();
+        $jsonOutput = new JsonOutput($textFormatter);
 
-        $N = count($rewardsInPool);
-
-        for ($o = 0; $o < $N; $o++) {
-            do {
-                $randedIndex = rand(1, $ticketsCount);
-            } while ($rewards[$randedIndex] !== Lottery::REWARD_NAME_EMPTY);
-
-            $rewards[$randedIndex] = $rewardsInPool[$o];
-        }
-
-        $json = "{";
-        for ($z = 1; $z <= $ticketsCount; $z++) {
-            $json .= '"' . $z . '":"' . $rewards[$z] . '", ';
-        }
-
-        $json .= '"month":"' . CalendarLocales::getCurrentMonthName() . '","year":"' . date("Y") . '"}';
         $result = new LotteryResult();
         $result->datetime = Carbon::now();
-        $result->rewards = $json;
-        // TODO:
-        echo $json;
-        //exit();
+        $result->rewards = $jsonOutput->formatText(clone $results);
         //$result->save();
+
+        Lottery::printLotteryOutput($results);
     }
 }
